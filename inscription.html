@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>inscription</title>
+    <script>
+        function validerFormulaire() {
+            var pseudo = document.getElementById('pseudo').value;
+            var mdp = document.getElementById('mdp').value;
+            var confmdp = document.getElementById('confmdp').value;
+            var mail = document.getElementById('mail').value;
+            var role = document.getElementById('role').value;
+            var erreur = document.getElementById('erreur');
+
+            erreur.style.display = 'none';
+
+            if (pseudo === "" || mdp === "" || confmdp === "" || mail === "" || role === "") {
+                erreur.style.display = 'block';
+                erreur.innerHTML = 'Tous les champs doivent être remplis !';
+                return false; 
+            }
+
+            if (mdp !== confmdp) {
+                erreur.style.display = 'block';
+                erreur.innerHTML = 'Les mots de passe ne correspondent pas !';
+                return false;
+            }
+
+            var regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!regexMail.test(mail)) {
+                erreur.style.display = 'block';
+                erreur.innerHTML = 'L\'email n\'est pas valide !';
+                return false;
+            }
+
+            return true;
+        }
+    </script>
+</head>
+<body>
+    <center>
+        <div class="container">
+            <div id="erreur" style="display:none; color: red;">
+            </div>
+            <h2>Formulaire d'inscription</h2>
+            <form name="forins" id="forins" method="post" action="validation_inscription.php" onsubmit="return validerFormulaire()">
+                <table>
+                    <tr>
+                        <td><label for="nom">Nom :</label></td>
+                        <td><input type="text" name="nom" id="nom" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="prenom">Prénom :</label></td>
+                        <td><input type="text" name="prenom" id="prenom" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="pseudo">Pseudo :</label></td>
+                        <td><input type="text" name="pseudo" id="pseudo" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="telephone">Téléphone :</label></td>
+                        <td><input type="text" name="telephone" id="telephone" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="mdp">Mot de passe :</label></td>
+                        <td><input type="password" name="mdp" id="mdp" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="confmdp">Confirmer Mot de passe :</label></td>
+                        <td><input type="password" name="confmdp" id="confmdp" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="mail">E-mail :</label> </td>
+                        <td><input type="text" name="mail" id="mail" class="champ" /></td>
+                    </tr>
+                    <tr>
+                        <td><label for="role">Rôle :</label></td>
+                        <td>
+                            <select name="role" id="role" class="champ">
+                                <option value="">Sélectionner un rôle</option>
+                                <option value="visiteur_medical">Visiteur Médical</option>
+                                <option value="delegue_regional">Délégué Régional</option>
+                                <option value="responsable_secteur">Responsable Secteur</option>
+                            </select>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">
+                            <input type="submit" id="envoi" name="Envoyer" value="Envoyer" />
+                            <input type="reset" id="rafraichir" value="Rafraîchir" />
+                            <input type="button" value="Retour" onclick="location.href='index.html' "/>
+                        </td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </center>
+</body>
+</html>
