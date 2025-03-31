@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        include 'chemin/vers/le/fichier/qui/contient/donnees.php';
+
+    </script>
+    <!-- création du tableau pour afficher les rapports -->
+    <div class="container">
+        <h1>Liste des Rapports</h1>
+        <table id="rapports.php">
+            <thead>
+                <tr>
+                    <th><?php echo $donnees['AdresseRapport'];?></th>
+                    <th><?php echo $donnees['DateRapport'];?></th>   
+                    <th><?php echo $donnees['Id_Practicien'];?></th>
+                    <th><?php echo $donnees['Id_Visiteur'];?></th>
+                    <th><?php echo $donnees['Id_Rapport'];?></th>
+                </tr>
+            </thead>
+            <tbody id="rapportTableBody">
+                <!-- Les lignes de la table seront ajoutées ici par JavaScript -->
+            </tbody>
+    </div>
+</body>
+</html>
