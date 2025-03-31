@@ -1,0 +1,29 @@
+<?php
+include 'config.php';
+$sql = 'SELECT MailMedecin, NumeroTelephoneMedecin FROM practicien;';
+$test = $bdd->prepare($sql);
+
+$test->execute();
+$var = $test->fetchAll();
+?> 
+<select id="practitioner" name="practitioner">
+    <?php
+    foreach ($var as $key => $value) {
+        // echo "<br/> Tableau " . $key . "<br/>";
+        // echo $value['MailMedecin'] . " " . $value['NumeroTelephoneMedecin'];
+        $mail = htmlspecialchars($value['MailMedecin']);
+        $phone = htmlspecialchars($value['NumeroTelephoneMedecin']);
+        echo "<option value=\"$key\">". "Mail : ".$mail. " / Téléphone : " . $phone."</option>";
+    }
+?>
+</select>
+<?php
+/* 
+<select id="practitioner" name="practitioner">
+    <option value="1">Dr. Dupont</option>
+    <option value="2">Dr. Martin</option>
+    <option value="3">Dr. Leroy</option>
+    <!-- Ajoutez d'autres options au besoin -->
+</select>
+*/
+?>
