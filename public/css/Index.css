@@ -29,11 +29,57 @@ header{
     }
 }
 
-main{
+main {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     align-items: center;
-    padding: 10%
+    padding: 5%;
+
+    h2 {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        text-align: center;
+    }
+
+    p {
+        font-size: 1.2rem;
+        margin-bottom: 2rem;
+        text-align: center;
+        color: #555;
+    }
+}
+
+aside {
+    display: flex;
+    gap: 2rem;
+    justify-content: center;
+}
+
+.container {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    width: 250px;
+    padding: 1rem;
+
+    img {
+        max-width: 75%;
+        height: auto;
+        border-bottom: 2px solid #ddd;
+        margin-bottom: 1rem;
+    }
+
+    h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.5rem;
+        color: #333;
+    }
+    
+    p {
+        font-size: 1rem;
+        color: #666;
+    }
 }
 
 footer{
