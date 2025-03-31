@@ -1,9 +1,19 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
+<html lang="fr"><head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>inscription</title>
+<link rel="stylesheet" href="connexioninscription.css"></head>
+<body><header>
+    <img src="images/gsbicon.png">
+    <div class="menu">
+        <p>Home</p>
+        <p>List</p>
+        <p>Ajout</p>
+        <p>Statistique</p>
+        <p>s'inscrire</p>
+    </div>
+</header>
     <script>
         function validerFormulaire() {
             var pseudo = document.getElementById('pseudo').value;
@@ -37,64 +47,89 @@
             return true;
         }
     </script>
-</head>
-<body>
+
     <center>
         <div class="container">
-            <div id="erreur" style="display:none; color: red;">
-            </div>
+            <center> <img src="images/gsbicon.png"></center>
             <h2>Formulaire d'inscription</h2>
-            <form name="forins" id="forins" method="post" action="validation_inscription.php" onsubmit="return validerFormulaire()">
-                <table>
-                    <tr>
-                        <td><label for="nom">Nom :</label></td>
-                        <td><input type="text" name="nom" id="nom" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="prenom">Prénom :</label></td>
-                        <td><input type="text" name="prenom" id="prenom" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="pseudo">Pseudo :</label></td>
-                        <td><input type="text" name="pseudo" id="pseudo" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="telephone">Téléphone :</label></td>
-                        <td><input type="text" name="telephone" id="telephone" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="mdp">Mot de passe :</label></td>
-                        <td><input type="password" name="mdp" id="mdp" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="confmdp">Confirmer Mot de passe :</label></td>
-                        <td><input type="password" name="confmdp" id="confmdp" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="mail">E-mail :</label> </td>
-                        <td><input type="text" name="mail" id="mail" class="champ" /></td>
-                    </tr>
-                    <tr>
-                        <td><label for="role">Rôle :</label></td>
-                        <td>
-                            <select name="role" id="role" class="champ">
-                                <option value="">Sélectionner un rôle</option>
-                                <option value="visiteur_medical">Visiteur Médical</option>
-                                <option value="delegue_regional">Délégué Régional</option>
-                                <option value="responsable_secteur">Responsable Secteur</option>
-                            </select>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">
-                            <input type="submit" id="envoi" name="Envoyer" value="Envoyer" />
-                            <input type="reset" id="rafraichir" value="Rafraîchir" />
-                            <input type="button" value="Retour" onclick="location.href='index.html' "/>
-                        </td>
-                    </tr>
-                </table>
-            </form>
-        </div>
+            <form name="gsbinscription" id="gsbinscription" method="post" action="connexion.php">
+                <div class="inputs">
+                        </div><input type="text" name="nom" placeholder="Rentrez votre nom"><input type="text" name="prenom" placeholder="Rentrez votre prénom"><input type="text" name="telephone" placeholder="Rentrez votre numéro de téléphone"><input type="password" name="mdp" placeholder="Rentrez votre mot de passe"><input type="password" name="confmdp" placeholder="Veuillez confirmer votre mot de passe"><input type="text" name="mail" placeholder="Rentrez votre adresse mail"><table>
+                    <tbody><tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            
+                        </tr>
+                        <tr>
+                            <td><label for="role">Rôle :</label></td>
+                            <td>
+                                <select name="role" id="role" class="champ">
+                                    <option value="">Sélectionner un rôle</option>
+                                    <option value="visiteur_medical">Visiteur Médical</option>
+                                    <option value="delegue_regional">Délégué Régional</option>
+                                    <option value="responsable_secteur">Responsable Secteur</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2">
+                                <input type="submit" id="envoi" name="Envoyer" value="Envoyer">
+                                <input type="reset" id="rafraichir" value="Rafraîchir">
+                                <input type="button" value="Retour" onclick="location.href='index.html' ">
+                                <input type="submit" id="connexion" name="Connexion" value="Connexion">
+                            </td>
+                        </tr>
+                </tbody></table>
+        </form></div>
     </center>
-</body>
-</html>
+<script>
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
