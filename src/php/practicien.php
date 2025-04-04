@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-$sql = 'SELECT MailMedecin, NumeroTelephoneMedecin FROM practicien;';
+$sql = 'SELECT MailMedecin FROM practicien;';
 $test = $bdd->prepare($sql);
 
 $test->execute();
@@ -12,8 +12,7 @@ $var = $test->fetchAll();
         // echo "<br/> Tableau " . $key . "<br/>";
         // echo $value['MailMedecin'] . " " . $value['NumeroTelephoneMedecin'];
         $mail = htmlspecialchars($value['MailMedecin']);
-        $phone = htmlspecialchars($value['NumeroTelephoneMedecin']);
-        echo "<option value=\"$key\">". "Mail : ".$mail. " / Téléphone : " . $phone."</option>";
+        echo "<option value=\"$key\">". "Mail : ".$mail."</option>";
     }
 ?>
 </select>

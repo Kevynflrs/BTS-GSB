@@ -13,56 +13,63 @@
 <form action="formulaire.php" method="post" enctype="multipart/form-data">
     <!-- Date de visite -->
     <div class="form-group">
-        <label for="visit-date">Date de visite:</label>
+        <label for="visit-date">Date de visite</label>
         <input type="date" id="visit-date" name="visit-date" required>
     </div>
 
-    <!-- Médecin visité -->
     <div class="form-group">
-        <label for="doctor">Médecin visité:</label>
-        <input type="text" id="doctor" name="doctor" required>
+        <label for="prenom">Prénom </label>
+        <input type="text" id="prenom" name="prenom" required>
+    </div>
+    <div class="form-group">
+        <label for="adresse">Votre adresse </label>
+        <input type="text" id="adresse" name="adresse" required>
+    </div>
+    <div class="form-group">
+        <label for="codepostal">Code postal </label>
+        <input type="text" id="codepostal" name="codepostal" required>
+    </div>
+    <div class="form-group">
+        <label for="ville">Ville </label>
+        <input type="text" id="ville" name="ville" required>
     </div>
 
-    <!-- Produits pharmaceutiques présentés -->
-    <div class="form-group">
-        <label for="products">Produits pharmaceutiques présentés:</label>
-        <textarea id="products" name="products" rows="4" required></textarea>
-    </div>
-
-    <!-- Échantillons fournis -->
-    <div class="form-group">
-        <label for="samples">Échantillons fournis:</label>
-        <textarea id="samples" name="samples" rows="4" required></textarea>
-    </div>
-
-    <!-- Avis et commentaires du médecin -->
-    <div class="form-group">
-        <label for="comments">Avis et commentaires du médecin:</label>
-        <textarea id="comments" name="comments" rows="4" required></textarea>
-    </div>
+    
+    <br><hr><br>
+    
 
     <!-- Lier un rapport à un praticien -->
     <div class="form-group">
-        <label for="practitioner">Lier à un praticien:</label>
+        <label for="practitioner">Email practicien </label>
         <?php include 'practicien.php'; ?>
     </div>
 
     <!-- Ajouter des pièces jointes -->
     <div class="form-group">
-        <label for="attachments">Ajouter des pièces jointes:</label>
-        <input type="file" id="attachments" name="attachments" multiple>
+        <label for="region">Région </label>
+        <textarea id="region" name="region" rows="4" required></textarea>
     </div>
 
-    <!-- Notes supplémentaires -->
+    <!-- Échantillons fournis -->
     <div class="form-group">
-        <label for="notes">Notes supplémentaires:</label>
-        <textarea id="notes" name="notes" rows="4"></textarea>
+        <label for="samples">Échantillons fournis</label>
+        <textarea id="samples" name="samples" rows="4" required></textarea>
     </div>
+
+    <!-- Produits pharmaceutiques présentés -->
+    <div class="form-group">
+        <label for="products">Produits pharmaceutiques présentés</label>
+        <textarea id="products" name="products" rows="4" required></textarea>
+    </div>
+
+    
 
     <!-- Bouton de soumission -->
     <div class="form-group">
         <button name="submit" type="submit">Soumettre le rapport</button>
     </div>
+
+    
 </form>
 
 </body>

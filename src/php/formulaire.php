@@ -22,13 +22,33 @@ if (isset($_POST['submit'])) {
         $now = new DateTime('now');
         $now = $now->format('Y-m-d');
         
-        if ($dateVisite < $now) {
-            echo "<p> La date de visite doit être supérieure à la date actuelle </p>";
+        if ($dateVisite > $now) {
+            echo "<p> La date de visite doit être inférieure ou égale à la date actuelle </p>";
         }
         else
+        {
             echo "<p> La date de visite est correcte </p>";
+
+            // Récupérer les données du formulaire
+            $visitDate = $_POST['visit-date'];
+            $prenom = $_POST['prenom'];
+            $samples = $_POST['samples'];
+            $codepostal = $_POST['codepostal'];
+            $ville = $_POST['ville'];
+            
+            // Vérifier si des fichiers ont été téléchargés
+            $attachments = $_FILES['attachments'] ?? null;
+
+            // Afficher les données
+            echo "<h2>Résultats du formulaire</h2>";
+            echo "<p><strong>Date de visite:</strong> $visitDate</p>";
+            echo "<p><strong>Prénom:</strong> $prenom</p>";
+            echo "<p><strong>Échantillons fournis:</strong> $samples</p>";
+            echo "<p><strong>Code postal:</strong> $codepostal</p>";
+            echo "<p><strong>Ville :</strong> $ville</p>";
+        }
     }
-    
+        
 }
 
 
