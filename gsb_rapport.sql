@@ -98,7 +98,7 @@ DROP TABLE IF EXISTS `produit`;
 CREATE TABLE IF NOT EXISTS `produit` (
   `Id_Produit` int NOT NULL AUTO_INCREMENT,
   `NomProduit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `DateAjoutProduit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `DateAjoutProduit` date DEFAULT NULL,
   `Libele` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `QuantiteProduit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`Id_Produit`)
