@@ -63,7 +63,7 @@ CREATE TABLE IF NOT EXISTS `echantillon` (
   `DateDistributionEchantillon` date DEFAULT NULL,
   `NomEchantillon` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   `Libele` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `QuantitePrdouit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `QuantiteEchantillon` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
   PRIMARY KEY (`Id_Echantillon`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
