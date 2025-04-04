@@ -33,8 +33,12 @@ if (isset($_POST['submit'])) {
             $visitDate = $_POST['visit-date'];
             $prenom = $_POST['prenom'];
             $samples = $_POST['samples'];
+            $adresse = $_POST['address'];
             $codepostal = $_POST['codepostal'];
             $ville = $_POST['ville'];
+            
+            $adresse = $adresse + $codepostal + $ville;
+            alert($adresse);
             
             // Vérifier si des fichiers ont été téléchargés
             $attachments = $_FILES['attachments'] ?? null;
@@ -46,6 +50,16 @@ if (isset($_POST['submit'])) {
             echo "<p><strong>Échantillons fournis:</strong> $samples</p>";
             echo "<p><strong>Code postal:</strong> $codepostal</p>";
             echo "<p><strong>Ville :</strong> $ville</p>";
+            
+            try {
+                // Supposons que la colonne dans rapport s'appelle aussi MailMedecin
+                $sql = 'INSERT INTO rapport (AdresseRapport, DateRapport,  SELECT MailMedecin FROM practicien;';
+                $test = $bdd->prepare($sql);
+                $test->execute();
+            } catch (PDOException $e) {
+                echo "<script>alert('Insertion à la base de données ratée.');</script>";
+            }
+            
         }
     }
         

@@ -1,6 +1,6 @@
 <?php
 include 'config.php';
-$sql = 'SELECT MailMedecin FROM practicien;';
+$sql = 'SELECT EmailPracticien FROM practicien;';
 $test = $bdd->prepare($sql);
 
 $test->execute();

@@ -10,7 +10,7 @@
 
 <h2>Formulaire de Rapport de Visite</h2>
 
-<form action="formulaire.php" method="post" enctype="multipart/form-data">
+<form action="rapport.php" method="post" enctype="multipart/form-data">
     <!-- Date de visite -->
     <div class="form-group">
         <label for="visit-date">Date de visite</label>
@@ -22,8 +22,8 @@
         <input type="text" id="prenom" name="prenom" required>
     </div>
     <div class="form-group">
-        <label for="adresse">Votre adresse </label>
-        <input type="text" id="adresse" name="adresse" required>
+        <label for="address">Votre adresse </label>
+        <input type="text" id="adresse" name="adress" required>
     </div>
     <div class="form-group">
         <label for="codepostal">Code postal </label>
@@ -51,15 +51,16 @@
     </div>
 
     <!-- Échantillons fournis -->
+    
+
     <div class="form-group">
         <label for="samples">Échantillons fournis</label>
-        <textarea id="samples" name="samples" rows="4" required></textarea>
+        <?php include 'echantillon.php'; ?>
     </div>
 
-    <!-- Produits pharmaceutiques présentés -->
     <div class="form-group">
         <label for="products">Produits pharmaceutiques présentés</label>
-        <textarea id="products" name="products" rows="4" required></textarea>
+        <?php include 'produit.php'; ?>
     </div>
 
     
