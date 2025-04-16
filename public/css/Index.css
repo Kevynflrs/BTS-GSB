@@ -30,6 +30,7 @@ header img{
 
 main {
     display: flex;
+    gap: 15rem;
     align-items: center;
     padding: 5%;
 
@@ -49,6 +50,17 @@ main {
 
 aside {
     display: flex;
+    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 50%;
+    max-height: 100%;
+}
+
+article {
+    display: flex;
+    flex-wrap: wrap;
     gap: 2rem;
     justify-content: center;
 }
