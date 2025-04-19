@@ -48,21 +48,42 @@ main {
     }
 }
 
+article {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+    justify-content: center;
+}
+
 aside {
     display: flex;
     gap: 2rem;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    max-width: 50%;
-    max-height: 100%;
+    width: 100%; /* Permet à l'aside de prendre toute la largeur */
+    height: auto; /* Permet à l'aside de s'adapter à son contenu */
 }
 
-article {
+.statistique-container {
+    width: 100%; /* Prend toute la largeur disponible */
+    height: auto; /* Ajuste la hauteur en fonction du contenu */
     display: flex;
-    flex-wrap: wrap;
-    gap: 2rem;
+    flex-direction: column;
+    align-items: center;
     justify-content: center;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    padding: 1rem;
+    margin-top: 1rem; /* Ajoute un espace au-dessus si nécessaire */
+}
+
+.statistique-container img {
+    max-width: 50%; /* Ajuste la taille de l'image */
+    height: auto;
+    margin-bottom: 1rem;
 }
 
 .container {
