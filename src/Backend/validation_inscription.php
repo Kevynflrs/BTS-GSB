@@ -1,53 +1,50 @@
 <?php
+require_once 'db_connection.php';
 
-// Vérifie la connexion
-try {
-    $bdd = new PDO('mysql:host=localhost:3306;dbname=gsb_rapport;charset=utf8', 'root', '');
-} catch (Exception $e) {
-    die('Erreur : ' . $e->getMessage());
-}
-echo "Connecté à la base de données.";
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $nom = htmlspecialchars(trim($_POST['nom']));
+    $prenom = htmlspecialchars(trim($_POST['prenom']));
+    $mdp = htmlspecialchars(trim($_POST['mdp']));
+    $confmdp = htmlspecialchars(trim($_POST['confmdp']));
+    $mail = htmlspecialchars(trim($_POST['mail']));
+    $telephone = htmlspecialchars(trim($_POST['telephone']));
+    $role = htmlspecialchars(trim($_POST['role']));
 
-// Récupère les données du formulaire
-if (isset($_POST['Envoyer'])) {
-    $nom = $_POST['nom'];
-    $prenom = $_POST['prenom'];
-    $telephone = $_POST['telephone'];
-    $username = $_POST['pseudo'];
-    $email = $_POST['mail'];
-    $password = $_POST['mdp'];
-    $password2 = $_POST['confmdp'];
-
-    $erreur = 0; // Initialisation de la variable $erreur
-
-    // Comparaison des mots de passe avant le hachage
-    if ($password != $password2) {
-        echo "Les mots de passe saisis doivent être égaux.";
-        $erreur += 1;
+    // Vérification des mots de passe
+    if ($mdp !== $confmdp) {
+        echo "Les mots de passe ne correspondent pas.";
+        exit;
     }
 
-    // Vérification de l'email et du numéro de téléphone (valides ou non)
-    if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-        echo "L'adresse e-mail n'est pas valide.";
-        $erreur += 1;
+    // Validation du numéro de téléphone
+    if (!preg_match('/^\+?[0-9\s\-]+$/', $telephone)) {
+        echo "Le numéro de téléphone est invalide.";
+        exit;
     }
 
-    if (!preg_match('/^[0-9]{10}+$/', $telephone)) {
-        echo "Le numéro de téléphone n'est pas valide.";
-        $erreur += 1;
+    // Validation de l'adresse e-mail
+    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
+        echo "L'adresse e-mail est invalide.";
+        exit;
     }
 
-    if ($erreur == 0) {
+    try {
+        // Vérification de la connexion à la base de données
+        $bdd = getDatabaseConnection();
+        if (!$bdd) {
+            throw new Exception("Impossible de se connecter à la base de données.");
+        }
+
         // Hachage du mot de passe
-        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $hashed_password = password_hash($mdp, PASSWORD_DEFAULT);
 
         // Insertion des données dans la base de données
-        $req = $bdd->prepare('INSERT INTO utilisateur(MotDePasse, NomUtilisateur, PrenomUtilisateur, Login, NumeroTelephoneUtilisateur, MailUtilisateur) VALUES(?, ?, ?, ?, ?, ?)');
-        $req->execute([$hashed_password, $nom, $prenom, $username, $telephone, $email]);
+        $req = $bdd->prepare('INSERT INTO utilisateur (MotDePasse, NomUtilisateur, PrenomUtilisateur, NumeroTelephoneUtilisateur, MailUtilisateur, `Rôle`) VALUES (?, ?, ?, ?, ?, ?)');
+        $req->execute([$hashed_password, $nom, $prenom, $telephone, $mail, $role]);
 
-        echo "Inscription réussie.";
-    } else {
-        echo "L'inscription n'a pas pu être établie avec succès.";
+        echo "Inscription réussie. <a href='../Frontend/connexion.html'>Se connecter</a>";
+    } catch (Exception $e) {
+        echo "Erreur : " . $e->getMessage();
     }
 }
 ?>
