@@ -23,7 +23,7 @@
     </div>
     <div class="form-group">
         <label for="address">Votre adresse </label>
-        <input type="text" id="adresse" name="adress" required>
+        <input type="text" id="address" name="address" required>
     </div>
     <div class="form-group">
         <label for="codepostal">Code postal </label>
@@ -47,7 +47,7 @@
     <!-- Ajouter des pièces jointes -->
     <div class="form-group">
         <label for="region">Région </label>
-        <textarea id="region" name="region" rows="4" required></textarea>
+        <?php include 'region.php'; ?>
     </div>
 
     <!-- Échantillons fournis -->

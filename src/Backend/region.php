@@ -1,18 +1,18 @@
-<?php
+﻿<?php
 include 'config.php';
-$sql = 'SELECT Id_Practicien, EmailPracticien FROM practicien;';
+$sql = 'SELECT IdRegion, NomRegion FROM region;';
 $test = $bdd->prepare($sql);
 
 $test->execute();
 $var = $test->fetchAll();
 ?> 
-<select id="practitioner" name="practitioner">
+<select id="region" name="region">
     <?php
     foreach ($var as $key => $value) {
         // echo "<br/> Tableau " . $key . "<br/>";
         // echo $value['MailMedecin'] . " " . $value['NumeroTelephoneMedecin'];
-        $mail = htmlspecialchars($value['EmailPracticien']);
-        $key = htmlspecialchars($value['Id_Practicien']);
+        $mail = htmlspecialchars($value['NomRegion']);
+        $key = htmlspecialchars($value['IdRegion']);
         echo "<option value=\"$key\">". "$key : ".$mail."</option>";
     }
 ?>
