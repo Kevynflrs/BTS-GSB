@@ -1,81 +1,47 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>Connexion</title>
-<link rel="stylesheet" href="../../public/css/connexioninscription.css"></head>
+    <meta name="description" content="Formulaire de connexion pour accéder à l'espace utilisateur de GSB.">
+    <meta name="keywords" content="GSB, connexion, espace utilisateur, login">
+    <meta name="author" content="GSB">
+    <title>Connexion - GSB</title>
+    <link rel="stylesheet" href="../../public/css/connexioninscription.css">
+</head>
 <body>
 <header>
-    <img src="../../public/img/GSB-Logo.png">
-    <div class="menu">
-        <p>Home</p>
-        <p>List</p>
-        <p>Ajout</p>
-        <p>Statistique</p>
-        <a href="../Frontend/connexion.html" target="_blank" class="button">Se connecter</a>
-    </div>
+    <img src="../../public/img/GSB-Logo.png" alt="Logo GSB">
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="list.html">Liste</a></li>
+            <li><a href="ajout.html">Ajout</a></li>
+            <li><a href="statistique.html">Statistiques</a></li>
+            <li><a href="connexion.html" class="button">Se connecter</a></li>
+        </ul>
+    </nav>
 </header>
 
-    <center>
-        <div class="container">
-            <center> <img src="../../public/img/GSB-Logo.png"></center>
-            <h2>Formulaire de connexion</h2>
-            <form name="gsb" id="gsb" method="post" action="connexion.php">
-                <div class="inputs">
-                        <input type="text" placeholder="Rentrez votre identifiant">
-                        <input type="password" placeholder="Rentrez votre mot de passe">
-                    </div><table>
-                    
-                    <tbody><tr>
-                        <td colspan="2">
-                            <input type="submit" id="connexion" name="Connexion" value="Connexion">
-                        </td>
-						<p>Pas de compte ?  <a href="../Frontend/inscription.html" target="_blank" class="button">S'inscrire</a></p>
-						
-                    </tr>
-                </tbody></table>
-            </form>
-        </div>
-    </center>
+<main>
+    <section class="container">
+        <h1>Formulaire de connexion</h1>
+        <p>Connectez-vous pour accéder à votre espace utilisateur.</p>
+        <form name="gsb" id="gsb" method="post" action="../Backend/connexion.php">
+            <label for="pseudo">Nom d'utilisateur :</label>
+            <input type="text" id="pseudo" name="pseudo" placeholder="Rentrez votre identifiant" required>
 
-<script>
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-</script>
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" placeholder="Rentrez votre mot de passe" required>
 
-</body>
+            <button type="submit" name="Connexion">Connexion</button>
+        </form>
+        <p>Pas de compte ? <a href="inscription.html">S'inscrire</a></p>
+    </section>
+</main>
+
 <footer>
-	<p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
+    <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
 </footer>
+</body>
 </html>

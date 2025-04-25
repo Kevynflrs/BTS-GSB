@@ -1,141 +1,64 @@
-<html lang="fr"><head>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    <title>inscription</title>
-<link rel="stylesheet" href="../../public/css/connexioninscription.css"></head>
+    <meta name="description" content="Formulaire d'inscription pour rejoindre GSB.">
+    <title>Inscription - GSB</title>
+    <link rel="stylesheet" href="../../public/css/connexioninscription.css">
+</head>
 <body>
 <header>
-    <img src="../../public/img/GSB-Logo.png">
-    <div class="menu">
-        <p>Home</p>
-        <p>List</p>
-        <p>Ajout</p>
-        <p>Statistique</p>
-        <p>Se connecter</p>
-    </div>
+    <img src="../../public/img/GSB-Logo.png" alt="Logo GSB">
+    <nav class="menu">
+        <ul>
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="list.html">Liste</a></li>
+            <li><a href="ajout.html">Ajout</a></li>
+            <li><a href="statistique.html">Statistiques</a></li>
+            <li><a href="connexion.html" class="button">Se connecter</a></li>
+        </ul>
+    </nav>
 </header>
-    <script>
-        function validerFormulaire() {
-            var pseudo = document.getElementById('pseudo').value;
-            var mdp = document.getElementById('mdp').value;
-            var confmdp = document.getElementById('confmdp').value;
-            var mail = document.getElementById('mail').value;
-            var role = document.getElementById('role').value;
-            var erreur = document.getElementById('erreur');
 
-            erreur.style.display = 'none';
+<main>
+    <section class="container">
+        <h1>Formulaire d'inscription</h1>
+        <p>Veuillez remplir les champs ci-dessous pour créer un compte.</p>
+        <form action="../Backend/validation_inscription.php" method="post">
+            <label for="nom">Nom :</label>
+            <input type="text" id="nom" name="nom" placeholder="Entrez votre nom" required>
+        
+            <label for="prenom">Prénom :</label>
+            <input type="text" id="prenom" name="prenom" placeholder="Entrez votre prénom" required>
+        
+            <label for="mdp">Mot de passe :</label>
+            <input type="password" id="mdp" name="mdp" placeholder="Entrez votre mot de passe" required>
+        
+            <label for="confmdp">Confirmer le mot de passe :</label>
+            <input type="password" id="confmdp" name="confmdp" placeholder="Confirmez votre mot de passe" required>
+        
+            <label for="mail">Adresse e-mail :</label>
+            <input type="email" id="mail" name="mail" placeholder="Entrez votre adresse e-mail" required>
+        
+            <label for="telephone">Numéro de téléphone :</label>
+            <input type="tel" id="telephone" name="telephone" placeholder="Entrez votre numéro de téléphone" required>
+        
+            <label for="role">Rôle :</label>
+            <select id="role" name="role" required>
+                <option value="">Sélectionner un rôle</option>
+                <option value="visiteur_medical">Visiteur Médical</option>
+                <option value="delegue_regional">Délégué Régional</option>
+                <option value="responsable_secteur">Responsable Secteur</option>
+            </select>
+        
+            <button type="submit">Envoyer</button>
+        </form>
+    </section>
+</main>
 
-            if (pseudo === "" || mdp === "" || confmdp === "" || mail === "" || role === "") {
-                erreur.style.display = 'block';
-                erreur.innerHTML = 'Tous les champs doivent être remplis !';
-                return false; 
-            }
-
-            if (mdp !== confmdp) {
-                erreur.style.display = 'block';
-                erreur.innerHTML = 'Les mots de passe ne correspondent pas !';
-                return false;
-            }
-
-            var regexMail = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-            if (!regexMail.test(mail)) {
-                erreur.style.display = 'block';
-                erreur.innerHTML = 'L\'email n\'est pas valide !';
-                return false;
-            }
-
-            return true;
-        }
-    </script>
-
-    <center>
-        <div class="container">
-            <center> <img src="../../public/img/GSB-Logo.png"></center>
-            <h2>Formulaire d'inscription</h2>
-            <form name="gsbinscription" id="gsbinscription" method="post" action="connexion.php">
-                <div class="inputs">
-                        </div><input type="text" name="nom" placeholder="Rentrez votre nom"><input type="text" name="prenom" placeholder="Rentrez votre prénom"><input type="text" name="telephone" placeholder="Rentrez votre numéro de téléphone"><input type="password" name="mdp" placeholder="Rentrez votre mot de passe"><input type="password" name="confmdp" placeholder="Veuillez confirmer votre mot de passe"><input type="text" name="mail" placeholder="Rentrez votre adresse mail"><table>
-                    <tbody><tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            
-                        </tr>
-                        <tr>
-                            <td><label for="role">Rôle :</label></td>
-                            <td>
-                                <select name="role" id="role" class="champ">
-                                    <option value="">Sélectionner un rôle</option>
-                                    <option value="visiteur_medical">Visiteur Médical</option>
-                                    <option value="delegue_regional">Délégué Régional</option>
-                                    <option value="responsable_secteur">Responsable Secteur</option>
-                                </select>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td colspan="2">
-                                <input type="submit" id="envoi" name="Envoyer" value="Envoyer">
-                                <input type="reset" id="rafraichir" value="Rafraîchir">
-                                <input type="button" value="Retour" onclick="location.href='index.html' ">
-                                <input type="submit" id="connexion" name="Connexion" value="Connexion">
-                            </td>
-                        </tr>
-                </tbody></table>
-        </form></div>
-    </center>
-<script>
-	if ('WebSocket' in window) {
-		(function () {
-			function refreshCSS() {
-				var sheets = [].slice.call(document.getElementsByTagName("link"));
-				var head = document.getElementsByTagName("head")[0];
-				for (var i = 0; i < sheets.length; ++i) {
-					var elem = sheets[i];
-					var parent = elem.parentElement || head;
-					parent.removeChild(elem);
-					var rel = elem.rel;
-					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
-						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
-						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
-					}
-					parent.appendChild(elem);
-				}
-			}
-			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
-			var address = protocol + window.location.host + window.location.pathname + '/ws';
-			var socket = new WebSocket(address);
-			socket.onmessage = function (msg) {
-				if (msg.data == 'reload') window.location.reload();
-				else if (msg.data == 'refreshcss') refreshCSS();
-			};
-			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
-				console.log('Live reload enabled.');
-				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
-			}
-		})();
-	}
-	else {
-		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
-	}
-	// ]]>
-</script>
-
-</body>
 <footer>
     <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
 </footer>
-
+</body>
 </html>
