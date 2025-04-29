@@ -1,6 +1,6 @@
 <?php
 
-require_once 'db_connection.php';
+require_once 'config.php';
 
 // Récupère la connexion à la base de données
 $bdd = getDatabaseConnection();

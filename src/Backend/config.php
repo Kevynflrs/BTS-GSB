@@ -1,9 +1,9 @@
 <?php
 function getDatabaseConnection() {
-    $host = 'localhost';
-    $dbname = 'gsb_rapport';
-    $username = 'adminweb';
-    $password = 'k2LrER8&14F*d5@!SkV%';
+    $host = 'galaxyvadmin.mysql.db';
+    $dbname = 'galaxyvadmin';
+    $username = 'galaxyvadmin';
+    $password = 'ykXhT5t9v54Veu0afj0C';
 
     try {
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
