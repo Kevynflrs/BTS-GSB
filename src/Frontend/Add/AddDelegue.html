@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ajouter un Délégué</title>
+    <link rel="stylesheet" href="../../../public/css/form.css" />
+</head>
+<body>
+    <header>
+        <img src="../../../public/img/GSB-Logo.png" />
+        <div class="menu">
+          <a href="/">Home</a>
+          <a href="../ajout.html">Ajout</a>
+          <a href="../connexion.html">Se connecter</a>
+        </div>
+    </header>
+
+    <main>
+        <section class="container">
+            <h1>Ajouter un Délégué</h1>
+            <form action="../Backend/AddDelegue.php" method="post">
+                <label for="region">Région :</label>
+                <select id="region" name="region" required>
+                    <option value="">Sélectionnez une région</option>
+                    <?php
+                    require_once '../Backend/config.php';
+                    $bdd = getDatabaseConnection();
+                    $regions = $bdd->query('SELECT IdRegion, NomRegion FROM region');
+                    foreach ($regions as $region) {
+                        echo "<option value=\"{$region['IdRegion']}\">{$region['NomRegion']}</option>";
+                    }
+                    ?>
+                </select>
+
+                <label for="utilisateur">Utilisateur :</label>
+                <select id="utilisateur" name="utilisateur" required>
+                    <option value="">Sélectionnez un utilisateur</option>
+                    <?php
+                    $utilisateurs = $bdd->query('SELECT Id_Utilisateur, NomUtilisateur, PrenomUtilisateur FROM utilisateur');
+                    foreach ($utilisateurs as $utilisateur) {
+                        echo "<option value=\"{$utilisateur['Id_Utilisateur']}\">{$utilisateur['PrenomUtilisateur']} {$utilisateur['NomUtilisateur']}</option>";
+                    }
+                    ?>
+                </select>
+
+                <button type="submit">Ajouter</button>
+            </form>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
+    </footer>
+</body>
+</html>
