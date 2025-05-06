@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 
     if (strtotime($date) > time()) {
-        die("La date d'ajout ne peut pas être ultérieure à la date actuelle.");
+        die("La date de distribution ne peut pas être ultérieure à la date actuelle.");
     }
 
     try {
@@ -22,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Préparation de la requête d'insertion
         $stmt = $bdd->prepare("
-            INSERT INTO produit (NomProduit, DateAjoutProduit, Libele, QuantiteProduit)
+            INSERT INTO echantillon (NomEchantillon, DateDistributionEchantillon, Libele, QuantiteEchantillon)
             VALUES (:nom, :date, :libele, :quantite)
         ");
 
@@ -34,13 +34,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':quantite' => $quantite,
         ]);
 
-        // permet de rediriger l'utilisateur vers la page d'ajout avec un message de succès
         echo "<script>
-            alert('Produit ajouté avec succès.');
+            alert('Échantillon ajouté avec succès.');
             window.location.href = '../../Frontend/ajout.html';
         </script>";
     } catch (Exception $e) {
-        die("Erreur lors de l'ajout du produit : " . $e->getMessage());
+        die("Erreur lors de l'ajout de l'échantillon : " . $e->getMessage());
     }
 } else {
     die("Méthode non autorisée.");

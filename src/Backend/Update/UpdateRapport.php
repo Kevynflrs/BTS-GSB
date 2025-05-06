@@ -2,6 +2,7 @@
 require_once '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    $idRapport = intval($_POST['id_rapport']);
     $adresse = htmlspecialchars(trim($_POST['adresse']));
     $date = htmlspecialchars(trim($_POST['date']));
     $echantillon = intval($_POST['echantillon']);
@@ -10,7 +11,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $practicien = intval($_POST['practicien']);
 
     // Vérification des champs obligatoires
-    if (empty($adresse) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien)) {
+    if (empty($idRapport) || empty($adresse) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien)) {
         die("Tous les champs sont obligatoires.");
     }
 
@@ -22,10 +23,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Connexion à la base de données
         $bdd = getDatabaseConnection();
 
-        // Préparation de la requête d'insertion
+        // Préparation de la requête de mise à jour
         $stmt = $bdd->prepare("
-            INSERT INTO rapport (AdresseRapport, DateRapport, Id_Echantillon, Id_Produit, Id_Visiteur, Id_Practicien)
-            VALUES (:adresse, :date, :echantillon, :produit, :visiteur, :practicien)
+            UPDATE rapport
+            SET AdresseRapport = :adresse,
+                DateRapport = :date,
+                Id_Echantillon = :echantillon,
+                Id_Produit = :produit,
+                Id_Visiteur = :visiteur,
+                Id_Practicien = :practicien
+            WHERE Id_Rappport = :id_rapport
         ");
 
         // Exécution de la requête avec les données du formulaire
@@ -36,14 +43,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':produit' => $produit,
             ':visiteur' => $visiteur,
             ':practicien' => $practicien,
+            ':id_rapport' => $idRapport,
         ]);
 
         echo "<script>
-            alert('Rapport ajouté avec succès.');
+            alert('Rapport mis à jour avec succès.');
             window.location.href = '../../Frontend/ajout.html';
         </script>";
     } catch (Exception $e) {
-        die("Erreur lors de l'ajout du rapport : " . $e->getMessage());
+        die("Erreur lors de la mise à jour du rapport : " . $e->getMessage());
     }
 } else {
     die("Méthode non autorisée.");

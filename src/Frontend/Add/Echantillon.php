@@ -1,12 +1,9 @@
-<?php
-require_once __DIR__ . '/../../Backend/Get/generateRegions.php';
-?>
 <!DOCTYPE html>
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Produit</title>
+    <title>Ajouter un Échantillon</title>
     <link rel="stylesheet" href="../../../public/css/form.css" />
 </head>
 <body>
@@ -21,12 +18,12 @@ require_once __DIR__ . '/../../Backend/Get/generateRegions.php';
 
     <main>
         <section class="container">
-            <h1>Ajouter un Produit</h1>
-            <form action="../../Backend/Add/AddProduit.php" method="post">
-                <label for="nom">Nom du Produit :</label>
-                <input type="text" id="nom" name="nom" placeholder="Entrez le nom du produit" required>
+            <h1>Ajouter un Échantillon</h1>
+            <form action="../../Backend/Add/AddEchantillon.php" method="post">
+                <label for="nom">Nom de l'Échantillon :</label>
+                <input type="text" id="nom" name="nom" placeholder="Entrez le nom de l'échantillon" required>
 
-                <label for="date">Date d'Ajout :</label>
+                <label for="date">Date de Distribution :</label>
                 <input type="date" id="date" name="date" max="<?php echo date('Y-m-d'); ?>" required>
 
                 <label for="libele">Libellé :</label>
@@ -40,9 +37,9 @@ require_once __DIR__ . '/../../Backend/Get/generateRegions.php';
         </section>
 
         <section class="container">
-            <h2>Mettre à jour un Produit</h2>
-            <p>Vous souhaitez modifier la quantité d'un produit existant ?</p>
-            <a href="../Update/produit.php" class="btn">Mettre à jour un produit</a>
+            <h2>Mettre à jour un Échantillon</h2>
+            <p>Vous souhaitez modifier la quantité d'un échantillon existant ?</p>
+            <a href="../Update/Echantillon.php" class="btn">Mettre à jour un Échantillon</a>
         </section>
     </main>
 

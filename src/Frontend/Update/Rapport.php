@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ajouter un Rapport</title>
+    <title>Mettre à jour un Rapport</title>
     <link rel="stylesheet" href="../../../public/css/form.css" />
 </head>
 <body>
@@ -18,20 +18,31 @@
 
     <main>
         <section class="container">
-            <h1>Ajouter un Rapport</h1>
-            <form action="../../Backend/Add/AddRapport.php" method="post">
+            <h1>Mettre à jour un Rapport</h1>
+            <form action="../../Backend/Update/UpdateRapport.php" method="post">
+                <label for="id_rapport">Rapport :</label>
+                <select id="id_rapport" name="id_rapport" required>
+                    <option value="">Sélectionnez un rapport</option>
+                    <?php
+                    require_once '../../Backend/config.php';
+                    $bdd = getDatabaseConnection();
+                    $rapports = $bdd->query('SELECT Id_Rappport, AdresseRapport FROM rapport');
+                    foreach ($rapports as $rapport) {
+                        echo "<option value=\"{$rapport['Id_Rappport']}\">{$rapport['AdresseRapport']}</option>";
+                    }
+                    ?>
+                </select>
+
                 <label for="adresse">Adresse du Rapport :</label>
                 <input type="text" id="adresse" name="adresse" placeholder="Entrez l'adresse du rapport" required>
 
                 <label for="date">Date du Rapport :</label>
-                <input type="date" id="date" name="date" required>
+                <input type="date" id="date" name="date" max="<?php echo date('Y-m-d'); ?>" required>
 
                 <label for="echantillon">Échantillon :</label>
                 <select id="echantillon" name="echantillon" required>
                     <option value="">Sélectionnez un échantillon</option>
                     <?php
-                    require_once '../Backend/config.php';
-                    $bdd = getDatabaseConnection();
                     $echantillons = $bdd->query('SELECT Id_Echantillon, NomEchantillon FROM echantillon');
                     foreach ($echantillons as $echantillon) {
                         echo "<option value=\"{$echantillon['Id_Echantillon']}\">{$echantillon['NomEchantillon']}</option>";
@@ -72,7 +83,7 @@
                     ?>
                 </select>
 
-                <button type="submit">Ajouter</button>
+                <button type="submit">Mettre à jour</button>
             </form>
         </section>
     </main>
