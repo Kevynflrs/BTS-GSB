@@ -58,7 +58,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             error_log($e->getMessage());
             echo "<script>
                 alert('Erreur : " . addslashes($e->getMessage()) . "');
-                window.location.href = '../../Frontend/Add/ajout.html';
+                window.location.href = '../../Frontend/ajout.html';
             </script>";
             exit;
         }
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "<script>
         alert('Méthode non autorisée.');
-        window.location.href = '../../Frontend/Add/ajout.html';
+        window.location.href = '../../Frontend/ajout.html';
     </script>";
     exit;
 }
