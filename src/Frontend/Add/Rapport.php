@@ -1,18 +1,29 @@
+<?php
+session_start(); // Assurez-vous que la session est démarrée
+require_once '../../Backend/config.php';
+$bdd = getDatabaseConnection();
+
+// Récupération de l'ID de la région de l'utilisateur connecté
+$regionId = $_SESSION['region_id'];
+?>
+
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ajouter un Rapport</title>
     <link rel="stylesheet" href="../../../public/css/form.css" />
 </head>
+
 <body>
     <header>
         <img src="../../../public/img/GSB-Logo.png" />
         <div class="menu">
-          <a href="/">Home</a>
-          <a href="../ajout.html">Ajout</a>
-          <a href="../connexion.html">Se connecter</a>
+            <a href="/">Home</a>
+            <a href="../ajout.html">Ajout</a>
+            <a href="../connexion.html">Se connecter</a>
         </div>
     </header>
 
@@ -55,9 +66,11 @@
 
                 <label for="visiteur">Visiteur :</label>
                 <select id="visiteur" name="visiteur" required>
-                    <option value="">Sélectionnez un visiteur</option>
+                    <option value="<?php echo $_SESSION['user_id']; ?>"><?php echo $_SESSION['username']; ?></option> <!-- Option "Moi" -->
                     <?php
-                    $visiteurs = $bdd->query("SELECT Id_Utilisateur, PrenomUtilisateur FROM utilisateur WHERE Role = 'visiteur'");
+                    // Filtrer les visiteurs par région
+                    $visiteurs = $bdd->prepare("SELECT Id_Utilisateur, PrenomUtilisateur FROM utilisateur WHERE Role = 'visiteur' AND IdRegion = :regionId");
+                    $visiteurs->execute([':regionId' => $regionId]);
                     foreach ($visiteurs as $visiteur) {
                         echo "<option value=\"{$visiteur['Id_Utilisateur']}\">{$visiteur['PrenomUtilisateur']}</option>";
                     }
@@ -68,7 +81,9 @@
                 <select id="practicien" name="practicien" required>
                     <option value="">Sélectionnez un praticien</option>
                     <?php
-                    $practiciens = $bdd->query('SELECT Id_Practicien, EmailPracticien FROM practicien');
+                    // Filtrer les praticiens par région
+                    $practiciens = $bdd->prepare('SELECT Id_Practicien, EmailPracticien FROM practicien WHERE IdRegion = :regionId');
+                    $practiciens->execute([':regionId' => $regionId]);
                     foreach ($practiciens as $practicien) {
                         echo "<option value=\"{$practicien['Id_Practicien']}\">{$practicien['EmailPracticien']}</option>";
                     }
@@ -84,4 +99,5 @@
         <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
     </footer>
 </body>
+
 </html>
