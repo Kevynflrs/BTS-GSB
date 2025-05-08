@@ -36,6 +36,9 @@
                 <label for="adresse">Adresse du Rapport :</label>
                 <input type="text" id="adresse" name="adresse" placeholder="Entrez l'adresse du rapport" required>
 
+                <label for="codepostal">Code Postal :</label>
+                <input type="text" id="codepostal" name="codepostal" placeholder="Entrez le code postal" required>
+
                 <label for="date">Date du Rapport :</label>
                 <input type="date" id="date" name="date" max="<?php echo date('Y-m-d'); ?>" required>
 
@@ -63,11 +66,11 @@
 
                 <label for="visiteur">Visiteur :</label>
                 <select id="visiteur" name="visiteur" required>
-                    <option value="">Sélectionnez un visiteur</option>
+                    <option value="<?php echo $_SESSION['user_id']; ?>"><?php echo $_SESSION['username']; ?></option> <!-- Option "Moi" -->
                     <?php
-                    $visiteurs = $bdd->query('SELECT Id_Visiteur, PrenomVisiteur FROM visiteur');
+                    $visiteurs = $bdd->query('SELECT Id_Utilisateur, PrenomUtilisateur FROM utilisateur WHERE Role = "visiteur"');
                     foreach ($visiteurs as $visiteur) {
-                        echo "<option value=\"{$visiteur['Id_Visiteur']}\">{$visiteur['PrenomVisiteur']}</option>";
+                        echo "<option value=\"{$visiteur['Id_Utilisateur']}\">{$visiteur['PrenomUtilisateur']}</option>";
                     }
                     ?>
                 </select>

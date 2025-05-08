@@ -1,5 +1,5 @@
 <?php
-
+session_start(); // Démarre la session pour stocker les données utilisateur
 require_once 'config.php';
 
 // Récupère la connexion à la base de données
@@ -11,14 +11,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     try {
         // Récupère les informations de l'utilisateur
-        $req = $bdd->prepare('SELECT * FROM utilisateur WHERE NomUtilisateur = ?');
+        $req = $bdd->prepare('SELECT Id_Utilisateur, NomUtilisateur, Role, IdRegion, MotDePasse FROM utilisateur WHERE NomUtilisateur = ?');
         $req->execute([$username]);
         $user = $req->fetch();
 
         if ($user && password_verify($password, $user['MotDePasse'])) {
-            echo "Connexion réussie. Bienvenue, " . htmlspecialchars($user['NomUtilisateur']) . "!";
+            // Stocke les informations de l'utilisateur dans la session
+            $_SESSION['user_id'] = $user['Id_Utilisateur'];
+            $_SESSION['username'] = $user['NomUtilisateur'];
+            $_SESSION['role'] = $user['Role'];
+            $_SESSION['region_id'] = $user['IdRegion'];
+
+            echo "<script>
+                alert('Connexion réussie. Bienvenue, " . htmlspecialchars($user['NomUtilisateur']) . "!');
+                window.location.href = '../Frontend/ajout.html';
+            </script>";
         } else {
-            echo "Login ou mot de passe incorrect.";
+            echo "<script>
+                alert('Login ou mot de passe incorrect.');
+                window.history.back();
+            </script>";
         }
     } catch (Exception $e) {
         echo "Erreur : " . $e->getMessage();

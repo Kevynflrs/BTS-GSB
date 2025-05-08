@@ -28,6 +28,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
+    // Validation du rôle
+    $rolesAutorises = ['visiteur', 'delegue', 'responsable'];
+    if (!in_array($role, $rolesAutorises)) {
+        echo "Le rôle spécifié est invalide.";
+        exit;
+    }
+
     try {
         // Vérification de la connexion à la base de données
         $bdd = getDatabaseConnection();
@@ -39,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $hashed_password = password_hash($mdp, PASSWORD_DEFAULT);
 
         // Insertion des données dans la base de données
-        $req = $bdd->prepare('INSERT INTO utilisateur (MotDePasse, NomUtilisateur, PrenomUtilisateur, NumeroTelephoneUtilisateur, MailUtilisateur, `Rôle`) VALUES (?, ?, ?, ?, ?, ?)');
+        $req = $bdd->prepare('INSERT INTO utilisateur (MotDePasse, NomUtilisateur, PrenomUtilisateur, NumeroTelephoneUtilisateur, MailUtilisateur, `Role`) VALUES (?, ?, ?, ?, ?, ?)');
         $req->execute([$hashed_password, $nom, $prenom, $telephone, $mail, $role]);
 
         echo "Inscription réussie. <a href='../Frontend/connexion.html'>Se connecter</a>";
