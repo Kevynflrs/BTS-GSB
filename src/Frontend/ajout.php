@@ -19,7 +19,7 @@ $bdd = getDatabaseConnection();
     <div class="menu">
       <a href="/">Home</a>
       <a href="liste.php">Liste</a>
-      <?php if ($isConnected): ?>
+      <?php if (isset($_SESSION['user_id'])): ?>
         <form action="../Backend/logout.php" method="post" style="display: inline;">
           <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
         </form>
@@ -35,36 +35,51 @@ $bdd = getDatabaseConnection();
       <p>Que souhaitez-vous ajouter aujourd'hui ?</p>
     </div>
     <section>
-      <a href="./Add/Visiteur.php" class="lg-container">
-        <img src="../../public/img/VisiteurCard.png" alt="Visiteur" />
-        <h3>Visiteur</h3>
-        <p>Ajouter un visiteur dans une région</p>
-      </a>
-      <a href="./Add/Delegue.php" class="lg-container">
-        <img src="../../public/img/Delegue.png" alt="Délégué" />
-        <h3>Délégué</h3>
-        <p>Ajouter un délégué dans une région</p>
-      </a>
+      <?php if (hasRole('delegue')): ?>
+        <a href="./Add/Visiteur.php" class="lg-container">
+          <img src="../../public/img/VisiteurCard.png" alt="Visiteur" />
+          <h3>Visiteur</h3>
+          <p>Ajouter un visiteur dans une région</p>
+        </a>
+      <?php endif; ?>
+
+      <?php if (hasRole('responsable')): ?>
+        <a href="./Add/Delegue.php" class="lg-container">
+          <img src="../../public/img/Delegue.png" alt="Délégué" />
+          <h3>Délégué</h3>
+          <p>Ajouter un délégué dans une région</p>
+        </a>
+      <?php endif; ?>
+
       <a href="./Add/Rapport.php" class="lg-container">
         <img src="../../public/img/Rapport.png" alt="Rapports" />
         <h3>Rapport</h3>
         <p>Ajouter un rapport dans une région</p>
       </a>
-      <a href="./Add/Practicien.php" class="lg-container">
-        <img src="" alt="Practicien" />
-        <h3>Practitien</h3>
-        <p>Ajouter un Practicien</p>
-      </a>
-      <a href="./Add/Produit.php" class="lg-container">
-        <img src="" alt="Produit" />
-        <h3>Produit</h3>
-        <p>Ajouter un produit</p>
-      </a>
-      <a href="./Add/Echantillon.php" class="lg-container">
-        <img src="" alt="échantillon" />
-        <h3>Produit</h3>
-        <p>Ajouter un échantillon</p>
-      </a>
+
+      <?php if (hasRole('responsable')): ?>
+        <a href="./Add/Practicien.php" class="lg-container">
+          <img src="" alt="Practicien" />
+          <h3>Practitien</h3>
+          <p>Ajouter un Practicien</p>
+        </a>
+      <?php endif; ?>
+
+      <?php if (hasRole('responsable')): ?>
+        <a href="./Add/Produit.php" class="lg-container">
+          <img src="" alt="Produit" />
+          <h3>Produit</h3>
+          <p>Ajouter un produit</p>
+        </a>
+      <?php endif; ?>
+
+      <?php if (hasRole('responsable')): ?>
+        <a href="./Add/Echantillon.php" class="lg-container">
+          <img src="" alt="échantillon" />
+          <h3>Échantillon</h3>
+          <p>Ajouter un échantillon</p>
+        </a>
+      <?php endif; ?>
     </section>
   </main>
 

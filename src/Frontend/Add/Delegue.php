@@ -3,6 +3,12 @@ require_once __DIR__ . '/../../Backend/Get/generateRegions.php';
 require_once __DIR__ . '/../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
 require_once __DIR__ . '/../../Backend/config.php';
 $bdd = getDatabaseConnection();
+
+// Vérifie si l'utilisateur a le rôle "responsable"
+if (!hasRole('responsable')) {
+    header('Location: ../ajout.php'); // Redirige vers une page accessible
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">

@@ -2,6 +2,12 @@
 require_once '../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
 require_once '../../Backend/config.php';
 $bdd = getDatabaseConnection();
+
+// Vérifie si l'utilisateur a le rôle "responsable"
+if (!hasRole('responsable')) {
+    header('Location: ../ajout.php'); // Redirige vers une page accessible
+    exit();
+}
 ?>
 
 <!DOCTYPE html>

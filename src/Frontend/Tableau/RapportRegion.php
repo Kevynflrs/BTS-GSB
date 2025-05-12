@@ -33,6 +33,12 @@ try {
 } catch (Exception $e) {
     die("Erreur : " . $e->getMessage());
 }
+
+// Vérifie si l'utilisateur a le rôle "responsable"
+if (!hasRole('delegue')) {
+    header('Location: ../liste.php'); // Redirige vers une page accessible
+    exit();
+}
 ?>
 <!DOCTYPE html>
 <html lang="fr">
