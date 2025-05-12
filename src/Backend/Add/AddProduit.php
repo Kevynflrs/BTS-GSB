@@ -37,7 +37,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // permet de rediriger l'utilisateur vers la page d'ajout avec un message de succès
         echo "<script>
             alert('Produit ajouté avec succès.');
-            window.location.href = '../../Frontend/ajout.html';
+            window.location.href = '../../Frontend/Add/Produit.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de l'ajout du produit : " . $e->getMessage());

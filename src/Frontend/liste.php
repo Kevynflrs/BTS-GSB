@@ -1,3 +1,8 @@
+<?php
+require_once '../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
+require_once '../Backend/config.php';
+$bdd = getDatabaseConnection();
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -12,8 +17,13 @@
       <div class="menu">
         <a href="/">Home</a>
         <a href="ajout.html">Ajout</a>
-        <a>Statistique</a>
-        <a href="connexion.html">Se connecter</a>
+        <?php if ($isConnected): ?>
+          <form action="../Backend/logout.php" method="post" style="display: inline;">
+            <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
+          </form>
+        <?php else: ?>
+          <a href="connexion.html">Se connecter</a>
+        <?php endif; ?>
       </div>
     </header>
 

@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert('Rapport ajouté avec succès.');
-            window.location.href = '../../Frontend/ajout.html';
+            window.location.href = '../../Frontend/Add/Rapport.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de l'ajout du rapport : " . $e->getMessage());

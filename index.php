@@ -1,3 +1,8 @@
+<!-- filepath: /var/www/html/BTS-GSB/index.php -->
+<?php
+session_start();
+$isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
+?>
 <!DOCTYPE html>
 <html lang="fr">
   <head>
@@ -10,10 +15,15 @@
     <header>
       <img src="./public/img/GSB-Logo.png" />
       <div class="menu">
-        <a>List</a>
-        <a href="./src/Frontend/ajout.html" >Ajout</a>
-        <a>Statistique</a>
-        <a href="./src/Frontend/connexion.html">Se connecter</a>
+        <a href="./src/Frontend/liste.php">Liste</a>
+        <a href="./src/Frontend/ajout.php">Ajout</a>
+        <?php if ($isConnected): ?>
+          <form action="./src/Backend/logout.php" method="post" style="display: inline;">
+            <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
+          </form>
+        <?php else: ?>
+          <a href="./src/Frontend/connexion.html">Se connecter</a>
+        <?php endif; ?>
       </div>
     </header>
 
@@ -24,22 +34,17 @@
       </aside>
       <aside>
         <h2>Nos services</h2>
-        <p>Gerer les clients dans les meilleurs conditions possible</p>
+        <p>Gérer les clients dans les meilleures conditions possibles</p>
         <article>
-          <a href="" class="container">
+          <a href="./src/Frontend/liste.php" class="container">
             <img src="./public/img/Search.png" alt="Search" />
             <h3>Liste</h3>
             <p>Listes des rapports</p>
           </a>
-          <a href="./src/Frontend/ajout.html" class="container">
+          <a href="./src/Frontend/ajout.php" class="container">
             <img src="./public/img/Heal.png" alt="Add Rapports" />
             <h3>Ajout</h3>
             <p>Ajouter des Rapports</p>
-          </a>
-          <a href="" class="container statistique-container">
-            <img src="./public/img/Statistique.png" alt="Statistique" />
-            <h3>Statistique</h3>
-            <p>Afficher les Statistique</p>
           </a>
         </article>
       </aside>

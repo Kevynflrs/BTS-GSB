@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert('Échantillon ajouté avec succès.');
-            window.location.href = '../../Frontend/ajout.html';
+            window.location.href = '../../Frontend/Add/Echantillon.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de l'ajout de l'échantillon : " . $e->getMessage());

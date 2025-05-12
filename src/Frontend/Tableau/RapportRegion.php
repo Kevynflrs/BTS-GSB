@@ -1,5 +1,6 @@
 <?php
 session_start(); // Démarre la session pour accéder aux données utilisateur
+require_once '../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
 require_once '../../Backend/config.php';
 
 // Vérifie si l'utilisateur est connecté
@@ -35,19 +36,28 @@ try {
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapports par Région</title>
     <link rel="stylesheet" href="../../../public/css/table.css">
 </head>
+
 <body>
     <header>
         <img src="../../../public/img/GSB-Logo.png" />
         <div class="menu">
             <a href="/">Home</a>
+            <a href="../liste.php">Liste</a>
             <a href="../ajout.html">Ajout</a>
-            <a href="../connexion.html">Se connecter</a>
+            <?php if ($isConnected): ?>
+                <form action="../../Backend/logout.php" method="post" style="display: inline;">
+                    <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
+                </form>
+            <?php else: ?>
+                <a href="../connexion.html">Se connecter</a>
+            <?php endif; ?>
         </div>
     </header>
     <main>
@@ -91,4 +101,5 @@ try {
         <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
     </footer>
 </body>
+
 </html>

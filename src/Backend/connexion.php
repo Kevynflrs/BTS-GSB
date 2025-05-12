@@ -24,7 +24,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
             echo "<script>
                 alert('Connexion réussie. Bienvenue, " . htmlspecialchars($user['NomUtilisateur']) . "!');
-                window.location.href = '../Frontend/ajout.html';
+                window.location.href = '/';
             </script>";
         } else {
             echo "<script>
