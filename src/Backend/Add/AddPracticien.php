@@ -1,14 +1,17 @@
 <?php
+// La fonction trim() est utilisée pour supprimer les espaces blancs (ou autres caractères définis) 
+// au début et à la fin d'une chaîne. Cela permet de nettoyer les données saisies par l'utilisateur 
+// en supprimant les espaces inutiles qui pourraient causer des erreurs lors de la validation ou du traitement.
 require_once '../config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $email = filter_input(INPUT_POST, 'email', FILTER_VALIDATE_EMAIL);
-    $specialite = filter_input(INPUT_POST, 'specialite', FILTER_SANITIZE_STRING);
-    $description = filter_input(INPUT_POST, 'description', FILTER_SANITIZE_STRING);
-    $cabinet = filter_input(INPUT_POST, 'cabinet', FILTER_SANITIZE_STRING);
-    $adresse = filter_input(INPUT_POST, 'adresse', FILTER_SANITIZE_STRING);
-    $codepostal = filter_input(INPUT_POST, 'codepostal', FILTER_SANITIZE_STRING);
-    $ville = filter_input(INPUT_POST, 'ville', FILTER_SANITIZE_STRING);
+    $specialite = trim($_POST['specialite']);
+    $description = trim($_POST['description']);
+    $cabinet = trim($_POST['cabinet']);
+    $adresse = trim($_POST['adresse']);
+    $codepostal = trim($_POST['codepostal']);
+    $ville = trim($_POST['ville']);
     $region = filter_input(INPUT_POST, 'region', FILTER_VALIDATE_INT);
 
     // Vérification des champs obligatoires
