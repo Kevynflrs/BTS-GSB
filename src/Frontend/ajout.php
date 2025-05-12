@@ -1,4 +1,6 @@
 <?php
+session_start(); // Démarre la session pour accéder aux données utilisateur
+$isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
 require_once '../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
 require_once '../Backend/config.php';
 $bdd = getDatabaseConnection();

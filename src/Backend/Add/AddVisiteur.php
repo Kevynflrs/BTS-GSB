@@ -38,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert('Délégué ajouté avec succès.');
-            window.location.href = '../../Frontend/Add/AddVisiteur.php';
+            window.location.href = '../../Frontend/Add/Visiteur.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de l'ajout du visiteur : " . $e->getMessage());

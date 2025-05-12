@@ -48,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if ($stmt->execute()) {
                 echo "<script>
                     alert('Praticien ajouté avec succès !');
-                    window.location.href = '../../Frontend/Add/ajout.html';
+                    window.location.href = '../../Frontend/Add/ajout.php';
                 </script>";
                 exit;
             } else {
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 } else {
     echo "<script>
         alert('Méthode non autorisée.');
-        window.location.href = '../../Frontend/ajout.html';
+        window.location.href = '../../Frontend/ajout.php';
     </script>";
     exit;
 }

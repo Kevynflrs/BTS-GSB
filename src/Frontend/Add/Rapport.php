@@ -1,5 +1,6 @@
 <?php
-session_start(); // Assurez-vous que la session est démarrée
+session_start(); // Démarre la session pour accéder aux données utilisateur
+$isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
 require_once '../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
 require_once '../../Backend/config.php';
 $bdd = getDatabaseConnection();
@@ -24,7 +25,7 @@ $regionId = $_SESSION['region_id'];
         <div class="menu">
             <a href="/">Home</a>
             <a href="../liste.php">Liste</a>
-            <a href="../ajout.html">Ajout</a>
+            <a href="../ajout.php">Ajout</a>
             <?php if ($isConnected): ?>
                 <form action="../../Backend/logout.php" method="post" style="display: inline;">
                     <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>

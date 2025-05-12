@@ -1,6 +1,5 @@
-<!-- filepath: /var/www/html/BTS-GSB/index.php -->
 <?php
-session_start();
+session_start(); // Démarre la session pour accéder aux données utilisateur
 $isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
 ?>
 <!DOCTYPE html>
