@@ -2,8 +2,8 @@
 function getDatabaseConnection() {
     $host = 'localhost';
     $dbname = 'gsb_rapport';
-    $username = 'adminweb';
-    $password = 'k2LrER8&14F*d5@!SkV%';
+    $username = 'root';
+    $password = '';
 
     try {
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";

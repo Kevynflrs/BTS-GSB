@@ -1,119 +1,618 @@
+/* Reset de base et styles globaux */
 * {
-    box-sizing: border-box;
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
 }
 
 body {
-    background-color: #ecf1fa;
-    color: #333;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 100vh;
+  background-color: #ecf1fa;
+  color: #333;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  line-height: 1.6;
 }
 
+/* En-tête du site */
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: #5988ff;
-    padding: 10px 20px;
-    color: white;
-    width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #5988ff;
+  padding: 10px 20px;
+  color: white;
+  width: 100%;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 header img {
-    width: 100px;
-    height: auto;
+  width: 100px;
+  height: auto;
+  max-width: 120px;
 }
 
+/* Menu de navigation */
 .menu {
-    display: flex;
-    gap: 50px;
+  display: flex;
+  gap: 30px;
+  align-items: center;
 }
 
+.menu a {
+  color: white;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.menu a:hover {
+  background-color: rgba(255, 255, 255, 0.2);
+}
+
+/* Hamburger menu pour mobile - initialement caché */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.hamburger span {
+  display: block;
+  width: 25px;
+  height: 3px;
+  background-color: white;
+  margin: 3px 0;
+  transition: 0.3s;
+}
+
+/* Animation hamburger menu */
+.hamburger.active span:nth-child(1) {
+  transform: rotate(-45deg) translate(-5px, 6px);
+}
+
+.hamburger.active span:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger.active span:nth-child(3) {
+  transform: rotate(45deg) translate(-5px, -6px);
+}
+
+/* Contenu principal */
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  gap: 20px;
+}
+
+/* Container principal pour le contenu */
 .container {
-    background-color: #ffffff;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    max-width: 500px;
-    width: 90%;
-    margin: 20px auto;
+  background-color: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
 .container h1 {
-    font-size: 2rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #5988ff;
+  font-size: 2rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #5988ff;
+  font-weight: 600;
+}
+
+.container h2 {
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  text-align: center;
+  color: #5988ff;
+  font-weight: 600;
 }
 
 .container p {
-    font-size: 1rem;
-    margin-bottom: 20px;
-    text-align: center;
-    color: #666;
+  font-size: 1rem;
+  margin-bottom: 20px;
+  text-align: center;
+  color: #666;
+  line-height: 1.5;
 }
 
+/* Styles des formulaires */
 .container label {
-    display: block;
-    font-weight: bold;
-    margin-bottom: 5px;
-    color: #333;
+  display: block;
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #333;
+  font-size: 0.95rem;
 }
 
 .container input[type="text"],
 .container input[type="email"],
 .container input[type="password"],
 .container input[type="tel"],
-.container select {
-    width: 100%;
-    padding: 10px;
-    margin-bottom: 15px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    font-size: 1rem;
+.container input[type="date"],
+.container input[type="number"],
+.container select,
+.container textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 2px solid #e1e5e9;
+  border-radius: 8px;
+  background-color: #f8f9fa;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  resize: vertical;
+}
+
+.container textarea {
+  min-height: 100px;
+  font-family: inherit;
 }
 
 .container input[type="text"]:focus,
 .container input[type="email"]:focus,
 .container input[type="password"]:focus,
 .container input[type="tel"]:focus,
-.container select:focus {
-    border-color: #5988ff;
-    outline: none;
-    background-color: #fff;
+.container input[type="date"]:focus,
+.container input[type="number"]:focus,
+.container select:focus,
+.container textarea:focus {
+  border-color: #5988ff;
+  outline: none;
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(89, 136, 255, 0.1);
 }
 
 .container button {
-    width: 100%;
-    padding: 10px;
-    background-color: #5988ff;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+  width: 100%;
+  padding: 12px;
+  background-color: #5988ff;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-top: 10px;
 }
 
 .container button:hover {
-    background-color: #476dc5;
+  background-color: #476dc5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(89, 136, 255, 0.3);
 }
 
+.container button:active {
+  transform: translateY(0);
+}
+
+/* Style pour les liens boutons */
+.container .btn {
+  display: inline-block;
+  width: 100%;
+  padding: 12px;
+  background-color: #28a745;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  margin-top: 10px;
+}
+
+.container .btn:hover {
+  background-color: #218838;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+}
+
+/* Styles pour les liens dans les paragraphes */
+.container p a {
+  color: #5988ff;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.container p a:hover {
+  text-decoration: underline;
+}
+
+/* Pied de page */
 footer {
-    display: flex;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #5988ff;
+  color: white;
+  padding: 15px;
+  width: 100%;
+  margin-top: auto;
+}
+
+footer p {
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+/* Messages d'erreur et de succès */
+.error-message {
+  background-color: #f8d7da;
+  color: #721c24;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #f5c6cb;
+}
+
+.success-message {
+  background-color: #d4edda;
+  color: #155724;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  border: 1px solid #c3e6cb;
+}
+
+/* MEDIA QUERIES RESPONSIVES */
+
+/* Écrans très larges (> 1400px) */
+@media (min-width: 1401px) {
+  .container {
+    max-width: 600px;
+    padding: 40px;
+  }
+  
+  .container h1 {
+    font-size: 2.2rem;
+  }
+  
+  main {
+    padding: 40px;
+  }
+}
+
+/* Écrans larges (1201px - 1400px) */
+@media (min-width: 1201px) and (max-width: 1400px) {
+  .container {
+    max-width: 550px;
+  }
+}
+
+/* Écrans moyens (993px - 1200px) */
+@media (min-width: 993px) and (max-width: 1200px) {
+  header {
+    padding: 12px 20px;
+  }
+  
+  .menu {
+    gap: 25px;
+  }
+  
+  .container {
+    max-width: 500px;
+  }
+  
+  .container h1 {
+    font-size: 1.9rem;
+  }
+}
+
+/* Tablettes (769px - 992px) */
+@media (min-width: 769px) and (max-width: 992px) {
+  header {
+    padding: 12px 15px;
+  }
+  
+  .menu {
+    gap: 20px;
+  }
+  
+  .menu a {
+    padding: 6px 12px;
+    font-size: 0.95rem;
+  }
+  
+  .container {
+    max-width: 90%;
+    padding: 25px;
+  }
+  
+  .container h1 {
+    font-size: 1.8rem;
+  }
+  
+  main {
+    padding: 25px 15px;
+  }
+}
+
+/* Petites tablettes et grands mobiles (577px - 768px) */
+@media (min-width: 577px) and (max-width: 768px) {
+  header {
+    flex-wrap: wrap;
     justify-content: center;
+    text-align: center;
+    padding: 15px;
+    gap: 15px;
+  }
+  
+  header img {
+    width: 90px;
+  }
+  
+  .menu {
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 15px;
+  }
+  
+  .menu a {
+    padding: 8px 12px;
+    font-size: 0.9rem;
+  }
+  
+  .container {
+    width: 95%;
+    padding: 20px;
+  }
+  
+  .container h1 {
+    font-size: 1.7rem;
+  }
+  
+  .container h2 {
+    font-size: 1.4rem;
+  }
+  
+  main {
+    padding: 20px 10px;
+  }
+}
+
+/* Mobiles (≤ 576px) */
+@media (max-width: 576px) {
+  /* Activation du menu hamburger */
+  .hamburger {
+    display: flex;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+  }
+  
+  header {
+    flex-direction: column;
     align-items: center;
-    background-color: #5988ff;
-    color: white;
-    padding: 10px;
+    position: relative;
+    padding: 15px 20px;
+    min-height: 70px;
+  }
+  
+  header img {
+    width: 80px;
+    margin-bottom: 10px;
+  }
+  
+  .menu {
+    display: none;
+    flex-direction: column;
     width: 100%;
-    position: fixed;
-    bottom: 0;
+    background-color: #476dc5;
+    border-radius: 8px;
+    padding: 15px;
+    margin-top: 10px;
+    gap: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .menu.active {
+    display: flex;
+  }
+  
+  .menu a {
+    padding: 12px 16px;
+    text-align: center;
+    border-radius: 6px;
+    font-size: 1rem;
+  }
+  
+  .menu a:hover {
+    background-color: rgba(255, 255, 255, 0.25);
+  }
+  
+  .container {
+    width: 95%;
+    padding: 20px 15px;
+    margin-bottom: 15px;
+  }
+  
+  .container h1 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+  
+  .container h2 {
+    font-size: 1.3rem;
+    margin-bottom: 12px;
+  }
+  
+  .container p {
+    font-size: 0.95rem;
+    margin-bottom: 15px;
+  }
+  
+  .container label {
+    font-size: 0.9rem;
+    margin-bottom: 6px;
+  }
+  
+  .container input[type="text"],
+  .container input[type="email"],
+  .container input[type="password"],
+  .container input[type="tel"],
+  .container input[type="date"],
+  .container input[type="number"],
+  .container select,
+  .container textarea,
+  .container button,
+  .container .btn {
+    font-size: 0.95rem;
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+  
+  .container textarea {
+    min-height: 80px;
+  }
+  
+  main {
+    padding: 15px 10px;
+  }
+  
+  footer {
+    padding: 12px;
+  }
+  
+  footer p {
+    font-size: 0.85rem;
+    text-align: center;
+  }
+}
+
+/* Très petits écrans (≤ 320px) */
+@media (max-width: 320px) {
+  header {
+    padding: 10px 15px;
+  }
+  
+  header img {
+    width: 70px;
+  }
+  
+  .hamburger {
+    right: 15px;
+  }
+  
+  .container {
+    width: 98%;
+    padding: 15px 10px;
+  }
+  
+  .container h1 {
+    font-size: 1.4rem;
+  }
+  
+  .container h2 {
+    font-size: 1.2rem;
+  }
+  
+  .container p {
+    font-size: 0.9rem;
+  }
+  
+  .container input[type="text"],
+  .container input[type="email"],
+  .container input[type="password"],
+  .container input[type="tel"],
+  .container input[type="date"],
+  .container input[type="number"],
+  .container select,
+  .container textarea,
+  .container button,
+  .container .btn {
+    font-size: 0.9rem;
+    padding: 8px;
+  }
+  
+  main {
+    padding: 10px 5px;
+  }
+  
+  footer p {
+    font-size: 0.8rem;
+  }
+}
+
+/* Amélioration de l'accessibilité */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Mode sombre (si supporté par le navigateur) */
+@media (prefers-color-scheme: dark) {
+  body {
+    background-color: #1a1a1a;
+    color: #e0e0e0;
+  }
+  
+  .container {
+    background-color: #2d2d2d;
+    color: #e0e0e0;
+  }
+  
+  .container input[type="text"],
+  .container input[type="email"],
+  .container input[type="password"],
+  .container input[type="tel"],
+  .container input[type="date"],
+  .container input[type="number"],
+  .container select,
+  .container textarea {
+    background-color: #3a3a3a;
+    border-color: #555;
+    color: #e0e0e0;
+  }
+  
+  .container label {
+    color: #e0e0e0;
+  }
+}
+
+/* Orientation paysage sur mobile */
+@media (max-width: 768px) and (orientation: landscape) {
+  header {
+    padding: 8px 15px;
+    min-height: 60px;
+  }
+  
+  header img {
+    width: 70px;
+    margin-bottom: 5px;
+  }
+  
+  .container {
+    padding: 15px;
+  }
+  
+  .container h1 {
+    font-size: 1.5rem;
+  }
+  
+  main {
+    padding: 10px;
+  }
 }

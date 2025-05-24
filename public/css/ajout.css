@@ -1,87 +1,405 @@
-* {
-  box-sizing: border-box;
-  font-family: Arial, sans-serif;
-  margin: 0px;
-  padding: 0px;
-}
-
+/* Style général pour le corps */
 body {
-  background-color: #ecf1fa;
+    background-color: #ecf1fa;
+    color: #333;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
 }
 
+/* Style pour le header */
 header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #5988ff;
-  padding: 10px 20px;
-  color: white;
-  width: 100%;
-}
-.menu {
-  display: flex;
-  gap: 50px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #5988ff;
+    padding: 10px 20px;
+    color: white;
+    width: 100%;
 }
 
 header img {
-  width: 100px;
-  height: auto;
-}
-
-main {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding-bottom: 2rem;
-}
-
-footer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 1rem;
-  width: 100%;
-}
-
-
-section {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 2rem;
-  justify-content: center;
-}
-
-.lg-container {
-  background-color: #ffffff;
-  border-radius: 10px;
-  overflow: hidden;
-  text-align: center;
-  align-items: center;
-  width: 300px;
-  height: 300px;
-  padding: 1rem;
-
-  img {
-    max-width: 75%;
+    width: 100px;
     height: auto;
-    border-bottom: 2px solid #ddd;
-    margin-bottom: 1rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 0.5rem;
-    color: #333;
-  }
-
-  p {
-    font-size: 1rem;
-    color: #666;
-  }
+    margin-bottom: 10px;
 }
 
+.menu {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.menu a,
+.menu form button {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.menu a:hover,
+.menu form button:hover {
+    text-decoration: underline;
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Conteneur principal */
+.container {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Main content */
+main {
+    flex: 1;
+    padding: 20px;
+    max-width: 1200px;
+    margin: 0 auto;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* Section titre */
 .title {
-  text-align: center;
-  margin-bottom: 4rem;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+.title h1 {
+    color: #333333;
+    margin-bottom: 10px;
+    font-size: 2.2rem;
+    font-weight: bold;
+}
+
+.title p {
+    color: #666666;
+    font-size: 1.1rem;
+    margin: 0;
+}
+
+/* Section principale avec les cartes */
+section {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* Style pour les cartes */
+.lg-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    background-color: #ffffff;
+    border-radius: 12px;
+    padding: 30px 20px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    text-decoration: none;
+    color: inherit;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    min-height: 250px;
+    justify-content: space-between;
+}
+
+.lg-container:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #5988ff;
+}
+
+.lg-container img {
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    border-radius: 8px;
+}
+
+.lg-container h3 {
+    font-size: 1.4rem;
+    color: #333333;
+    margin: 15px 0 10px 0;
+    font-weight: bold;
+}
+
+.lg-container p {
+    color: #666666;
+    font-size: 1rem;
+    line-height: 1.5;
+    margin: 0;
+    flex-grow: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Titre général */
+h1 {
+    text-align: center;
+    color: #333333;
+    margin-bottom: 20px;
+    font-size: 1.8rem;
+}
+
+/* Style pour les tableaux */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+    min-width: 600px;
+}
+
+table thead {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+table th,
+table td {
+    padding: 12px 15px;
+    text-align: left;
+    border: 1px solid #dddddd;
+}
+
+table tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+table tbody tr:hover {
+    background-color: #f1f1f1;
+}
+
+/* Style pour les messages d'erreur ou d'absence de données */
+td[colspan] {
+    text-align: center;
+    color: #666666;
+    font-style: italic;
+}
+
+/* Pied de page */
+footer {
+    text-align: center;
+    margin-top: auto;
+    padding: 20px 0;
+    background-color: #f4f4f9;
+    color: #666666;
+    font-size: 14px;
+    border-top: 1px solid #e0e0e0;
+}
+
+/* Media Queries pour tablettes */
+@media (max-width: 1024px) {
+    main {
+        padding: 15px;
+    }
+    
+    section {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 20px;
+    }
+    
+    .lg-container {
+        padding: 25px 15px;
+        min-height: 220px;
+    }
+    
+    .title h1 {
+        font-size: 2rem;
+    }
+}
+
+/* Media Queries pour petits écrans */
+@media (max-width: 768px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+        padding: 15px;
+    }
+
+    header img {
+        width: 80px;
+        margin-bottom: 15px;
+    }
+
+    .menu {
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: flex-start;
+        width: 100%;
+        gap: 15px;
+    }
+
+    .menu a,
+    .menu form button {
+        width: auto;
+        text-align: left;
+        padding: 10px 15px;
+    }
+
+    main {
+        padding: 10px;
+    }
+
+    .title h1 {
+        font-size: 1.8rem;
+    }
+    
+    .title p {
+        font-size: 1rem;
+    }
+
+    section {
+        grid-template-columns: 1fr;
+        gap: 15px;
+        padding: 15px 0;
+    }
+
+    .lg-container {
+        padding: 20px 15px;
+        min-height: 200px;
+    }
+    
+    .lg-container img {
+        width: 60px;
+        height: 60px;
+        margin-bottom: 15px;
+    }
+    
+    .lg-container h3 {
+        font-size: 1.2rem;
+        margin: 10px 0 8px 0;
+    }
+    
+    .lg-container p {
+        font-size: 0.9rem;
+    }
+
+    .container {
+        padding: 15px;
+        margin: 10px;
+        border-radius: 6px;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+}
+
+/* Media Queries pour très petits écrans (mobiles en portrait) */
+@media (max-width: 480px) {
+    header {
+        padding: 10px;
+    }
+    
+    header img {
+        width: 70px;
+    }
+
+    .menu {
+        flex-direction: column;
+        width: 100%;
+        gap: 8px;
+    }
+
+    .menu a,
+    .menu form button {
+        width: 100%;
+        text-align: center;
+        padding: 12px;
+        background-color: rgba(255, 255, 255, 0.1);
+        border-radius: 6px;
+    }
+
+    main {
+        padding: 8px;
+    }
+
+    .title {
+        margin-bottom: 25px;
+    }
+
+    .title h1 {
+        font-size: 1.6rem;
+        margin-bottom: 8px;
+    }
+    
+    .title p {
+        font-size: 0.95rem;
+    }
+
+    section {
+        gap: 12px;
+        padding: 10px 0;
+    }
+
+    .lg-container {
+        padding: 18px 12px;
+        min-height: 180px;
+        border-radius: 8px;
+    }
+    
+    .lg-container img {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 12px;
+    }
+    
+    .lg-container h3 {
+        font-size: 1.1rem;
+        margin: 8px 0 6px 0;
+    }
+    
+    .lg-container p {
+        font-size: 0.85rem;
+        line-height: 1.4;
+    }
+
+    footer {
+        padding: 15px 10px;
+        font-size: 13px;
+    }
+}
+
+/* Media Queries pour très larges écrans */
+@media (min-width: 1400px) {
+    section {
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+    }
+    
+    .lg-container {
+        padding: 35px 25px;
+        min-height: 280px;
+    }
+    
+    .lg-container img {
+        width: 90px;
+        height: 90px;
+    }
+    
+    .title h1 {
+        font-size: 2.5rem;
+    }
+    
+    .title p {
+        font-size: 1.2rem;
+    }
 }
