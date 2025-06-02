@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert('Rapport mis à jour avec succès.');
-            window.location.href = '../../Frontend/Update/Rapport.php';
+            window.location.href = '../../Frontend/Add/Rapport.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de la mise à jour du rapport : " . $e->getMessage());

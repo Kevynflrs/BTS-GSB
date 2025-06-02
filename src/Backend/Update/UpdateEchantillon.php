@@ -29,7 +29,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         echo "<script>
             alert('Quantité mise à jour avec succès.');
-            window.location.href = '../../Frontend/Update/Echantillon.php';
+            window.location.href = '../../Frontend/Add/Echantillon.php';
         </script>";
     } catch (Exception $e) {
         die("Erreur lors de la mise à jour de la quantité : " . $e->getMessage());

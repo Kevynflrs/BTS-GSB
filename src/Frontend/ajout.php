@@ -61,7 +61,7 @@ $bdd = getDatabaseConnection();
 
       <?php if (hasRole('responsable')): ?>
         <a href="./Add/Practicien.php" class="lg-container">
-          <img src="../../public/img/Practicien.png" alt="Practicien" />
+          <img src="../../public/img/VisiteurCard.png" alt="Practicien" />
           <h3>Practitien</h3>
           <p>Ajouter un Practicien</p>
         </a>
@@ -69,7 +69,7 @@ $bdd = getDatabaseConnection();
 
       <?php if (hasRole('responsable')): ?>
         <a href="./Add/Produit.php" class="lg-container">
-          <img src="../../public/img/produit.png" alt="Produit" />
+          <img src="../../public/img/Delegue.png" alt="Produit" />
           <h3>Produit</h3>
           <p>Ajouter un produit</p>
         </a>
@@ -77,7 +77,7 @@ $bdd = getDatabaseConnection();
 
       <?php if (hasRole('responsable')): ?>
         <a href="./Add/Echantillon.php" class="lg-container">
-          <img src="../../public/img/echantillon.png" alt="échantillon" />
+          <img src="../../public/img/Rapport.png" alt="échantillon" />
           <h3>Échantillon</h3>
           <p>Ajouter un échantillon</p>
         </a>
