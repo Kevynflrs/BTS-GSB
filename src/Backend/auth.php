@@ -3,7 +3,7 @@
 
 // Vérifie si l'utilisateur est connecté
 if (!isset($_SESSION['user_id'])) {
-    header('Location: ../../Frontend/connexion.html');
+    header('Location: ../../src/Frontend/connexion.html');
     exit();
 }
 
