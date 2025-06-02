@@ -15,4 +15,3 @@ Ce projet est une application web de gestion de rapports pour le laboratoire GSB
 - **public/** : ressources statiques (images, CSS)
 - **src/Backend/** : logique serveur, accès base de données, authentification, API
 - **src/Frontend/** : pages HTML/PHP pour l’interface utilisateur
-- **gsb_rapport.sql** : script SQL pour la base de données

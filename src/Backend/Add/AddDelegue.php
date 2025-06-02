@@ -21,8 +21,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    if (strlen($password) < 8) {
-        echo "<script>alert('Le mot de passe doit contenir au moins 8 caractères.'); window.history.back();</script>";
+    if (strlen($password) < 7) {
+        echo "<script>alert('Le mot de passe doit contenir au moins 7 caractères.'); window.history.back();</script>";
         exit;
     }
 
@@ -45,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Affichage d'une popup de réussite et redirection
         echo "<script>
             alert('Délégué ajouté avec succès.');
-            window.location.href = '../../Frontend/Add/AddDelegue.php';
+            window.location.href = '../../Frontend/Add/Delegue.php';
         </script>";
     } catch (Exception $e) {
         echo "<script>alert('Erreur : " . addslashes($e->getMessage()) . "'); window.history.back();</script>";

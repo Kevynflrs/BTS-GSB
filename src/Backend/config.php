@@ -1,7 +1,7 @@
 <?php
 function getDatabaseConnection() {
     $host = 'galaxyvadmin.mysql.db';
-    $dbname = 'gsb_rapport';
+    $dbname = 'galaxyvadmin';
     $username = 'galaxyvadmin';
     $password = 'ykXhT5t9v54Veu0afj0C';
 
