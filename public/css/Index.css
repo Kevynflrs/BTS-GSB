@@ -6,7 +6,7 @@
 }
 
 body{
-    background-color: #ECF1FA;
+    background-color: #ecf1fa;
 }
 
 header {
@@ -18,6 +18,7 @@ header {
     color: white;
     width: 100%;
 }
+
 .menu {
     display: flex;
     gap: 50px;
@@ -33,19 +34,19 @@ main {
     gap: 15rem;
     align-items: center;
     padding: 5%;
+}
 
-    h2 {
-        font-size: 2rem;
-        margin-bottom: 1rem;
-        text-align: center;
-    }
+main h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+    text-align: center;
+}
 
-    p {
-        font-size: 1.2rem;
-        margin-bottom: 2rem;
-        text-align: center;
-        color: #555;
-    }
+main p {
+    font-size: 1.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+    color: #555;
 }
 
 article {
@@ -61,13 +62,13 @@ aside {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    width: 100%; /* Permet à l'aside de prendre toute la largeur */
-    height: auto; /* Permet à l'aside de s'adapter à son contenu */
+    width: 100%;
+    height: auto;
 }
 
 .statistique-container {
-    width: 100%; /* Prend toute la largeur disponible */
-    height: auto; /* Ajuste la hauteur en fonction du contenu */
+    width: 100%;
+    height: auto;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -77,11 +78,11 @@ aside {
     overflow: hidden;
     text-align: center;
     padding: 1rem;
-    margin-top: 1rem; /* Ajoute un espace au-dessus si nécessaire */
+    margin-top: 1rem;
 }
 
 .statistique-container img {
-    max-width: 50%; /* Ajuste la taille de l'image */
+    max-width: 50%;
     height: auto;
     margin-bottom: 1rem;
 }
@@ -93,24 +94,26 @@ aside {
     text-align: center;
     width: 250px;
     padding: 1rem;
+    text-decoration: none;
+    color: inherit;
+}
 
-    img {
-        max-width: 75%;
-        height: auto;
-        border-bottom: 2px solid #ddd;
-        margin-bottom: 1rem;
-    }
+.container img {
+    max-width: 75%;
+    height: auto;
+    border-bottom: 2px solid #ddd;
+    margin-bottom: 1rem;
+}
 
-    h3 {
-        font-size: 1.5rem;
-        margin-bottom: 0.5rem;
-        color: #333;
-    }
-    
-    p {
-        font-size: 1rem;
-        color: #666;
-    }
+.container h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: #333;
+}
+
+.container p {
+    font-size: 1rem;
+    color: #666;
 }
 
 footer{
@@ -119,5 +122,136 @@ footer{
     align-items: center;
     bottom: 0;
     width: 100%;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Tablettes (768px et moins) */
+@media screen and (max-width: 768px) {
+    .menu {
+        gap: 30px;
+    }
     
+    main {
+        gap: 8rem;
+        padding: 3%;
+    }
+    
+    main h2 {
+        font-size: 1.8rem;
+    }
+    
+    .container {
+        width: 220px;
+    }
+}
+
+/* Mobiles (480px et moins) */
+@media screen and (max-width: 480px) {
+    header {
+        flex-direction: column;
+        padding: 15px;
+        gap: 15px;
+    }
+    
+    .menu {
+        gap: 20px;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    
+    .menu a, .menu button {
+        padding: 8px 12px;
+        border-radius: 4px;
+        text-decoration: none;
+        color: white;
+    }
+    
+    header img {
+        width: 80px;
+    }
+    
+    main {
+        flex-direction: column;
+        gap: 2rem;
+        padding: 2rem 1rem;
+    }
+    
+    main h2 {
+        font-size: 1.6rem;
+    }
+    
+    main p {
+        font-size: 1.1rem;
+        padding: 0 1rem;
+    }
+    
+    aside {
+        width: 100%;
+        max-width: 400px;
+    }
+    
+    aside img {
+        max-width: 150px;
+    }
+    
+    aside h1 {
+        font-size: 1.8rem;
+        text-align: center;
+    }
+    
+    article {
+        gap: 1.5rem;
+    }
+    
+    .container {
+        width: 100%;
+        max-width: 280px;
+        margin: 0 auto;
+    }
+}
+
+/* Petits mobiles (320px et moins) */
+@media screen and (max-width: 320px) {
+    header {
+        padding: 10px;
+    }
+    
+    .menu {
+        gap: 10px;
+    }
+    
+    .menu a, .menu button {
+        font-size: 0.9rem;
+        padding: 6px 8px;
+    }
+    
+    main {
+        padding: 1rem 0.5rem;
+    }
+    
+    main h2 {
+        font-size: 1.4rem;
+    }
+    
+    main p {
+        font-size: 1rem;
+    }
+    
+    aside h1 {
+        font-size: 1.5rem;
+    }
+    
+    .container {
+        max-width: 250px;
+        padding: 0.8rem;
+    }
+    
+    .container h3 {
+        font-size: 1.3rem;
+    }
+    
+    .container p {
+        font-size: 0.9rem;
+    }
 }
