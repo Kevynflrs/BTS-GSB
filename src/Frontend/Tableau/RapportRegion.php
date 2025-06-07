@@ -1,27 +1,33 @@
 <?php
-session_start(); // Démarre la session pour accéder aux données utilisateur
-$isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
-require_once '../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
+session_start(); // Démarre la session
+require_once '../../Backend/auth.php';
 require_once '../../Backend/config.php';
 
-// Vérifie si l'utilisateur est connecté
+$isConnected = isset($_SESSION['user_id']);
+
 if (!isset($_SESSION['region_id'])) {
     die("Vous devez être connecté pour accéder à cette page.");
 }
 
-$regionId = $_SESSION['region_id']; // Récupère l'ID de la région de l'utilisateur connecté
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'responsable') {
+    die("Accès refusé : seuls les responsables peuvent modifier un rapport.");
+}
+
+$regionId = $_SESSION['region_id'];
 
 try {
     $bdd = getDatabaseConnection();
     $stmt = $bdd->prepare("
         SELECT 
+            r.Id_Rappport,
             r.AdresseRapport, 
             r.CodePostal, 
             r.DateRapport, 
             p.NomProduit, 
             e.NomEchantillon, 
             v.PrenomUtilisateur AS Visiteur, 
-            pr.EmailPracticien AS Practicien
+            pr.EmailPracticien AS Practicien,
+            r.etat
         FROM rapport r
         JOIN produit p ON r.Id_Produit = p.Id_Produit
         JOIN echantillon e ON r.Id_Echantillon = e.Id_Echantillon
@@ -29,15 +35,15 @@ try {
         JOIN practicien pr ON r.Id_Practicien = pr.Id_Practicien
         WHERE r.IdRegion = :regionId
     ");
+
     $stmt->execute([':regionId' => $regionId]);
     $reports = $stmt->fetchAll();
 } catch (Exception $e) {
     die("Erreur : " . $e->getMessage());
 }
 
-// Vérifie si l'utilisateur a le rôle "responsable"
 if (!hasRole('delegue')) {
-    header('Location: ../liste.php'); // Redirige vers une page accessible
+    header('Location: ../liste.php');
     exit();
 }
 ?>
@@ -46,7 +52,6 @@ if (!hasRole('delegue')) {
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Rapports par Région</title>
     <link rel="stylesheet" href="../../../public/css/table.css">
 </head>
@@ -70,6 +75,60 @@ if (!hasRole('delegue')) {
     <main>
         <section class="container">
             <h1>Rapports par Région</h1>
+    
+            <!-- Rapports valides -->
+            <h2>Rapports valides</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Adresse</th>
+                        <th>Code Postal</th>
+                        <th>Date</th>
+                        <th>Produit</th>
+                        <th>Échantillon</th>
+                        <th>Visiteur</th>
+                        <th>Praticien</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php
+                    $hasValid = false;
+                    foreach ($reports as $report):
+                        if ($report['etat'] !== 'supprimé'):
+                            $hasValid = true;
+                    ?>
+                        <tr>
+                            <td><?= htmlspecialchars($report['AdresseRapport']) ?></td>
+                            <td><?= htmlspecialchars($report['CodePostal']) ?></td>
+                            <td><?= htmlspecialchars($report['DateRapport']) ?></td>
+                            <td><?= htmlspecialchars($report['NomProduit']) ?></td>
+                            <td><?= htmlspecialchars($report['NomEchantillon']) ?></td>
+                            <td><?= htmlspecialchars($report['Visiteur']) ?></td>
+                            <td><?= htmlspecialchars($report['Practicien']) ?></td>
+                            <td>
+                                <a href="../Update/Rapport.php" title="Modifier">
+                                    <img src="../../../public/img/update.png" alt="Modifier" style="height:24px;">
+                                </a>
+                                <a href="../Delete/Rapport.php" title="supprimer">
+                                    <img src="../../../public/img/delete.png" alt="supprimer" style="height:24px;">
+                                </a>
+                            </td>
+                        </tr>
+                    <?php
+                        endif;
+                    endforeach;
+                    if (!$hasValid):
+                    ?>
+                        <tr>
+                            <td colspan="8" style="text-align: center;">Aucun rapport valide trouvé pour cette région.</td>
+                        </tr>
+                    <?php endif; ?>
+                </tbody>
+            </table>
+    
+            <!-- Rapports supprimés -->
+            <h2>Rapports supprimés</h2>
             <table>
                 <thead>
                     <tr>
@@ -83,21 +142,28 @@ if (!hasRole('delegue')) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php if (!empty($reports)): ?>
-                        <?php foreach ($reports as $report): ?>
-                            <tr>
-                                <td><?= htmlspecialchars($report['AdresseRapport']) ?></td>
-                                <td><?= htmlspecialchars($report['CodePostal']) ?></td>
-                                <td><?= htmlspecialchars($report['DateRapport']) ?></td>
-                                <td><?= htmlspecialchars($report['NomProduit']) ?></td>
-                                <td><?= htmlspecialchars($report['NomEchantillon']) ?></td>
-                                <td><?= htmlspecialchars($report['Visiteur']) ?></td>
-                                <td><?= htmlspecialchars($report['Practicien']) ?></td>
-                            </tr>
-                        <?php endforeach; ?>
-                    <?php else: ?>
+                    <?php
+                    $hasDeleted = false;
+                    foreach ($reports as $report):
+                        if ($report['etat'] === 'supprimé'):
+                            $hasDeleted = true;
+                    ?>
                         <tr>
-                            <td colspan="7" style="text-align: center;">Aucun rapport trouvé pour cette région.</td>
+                            <td><?= htmlspecialchars($report['AdresseRapport']) ?></td>
+                            <td><?= htmlspecialchars($report['CodePostal']) ?></td>
+                            <td><?= htmlspecialchars($report['DateRapport']) ?></td>
+                            <td><?= htmlspecialchars($report['NomProduit']) ?></td>
+                            <td><?= htmlspecialchars($report['NomEchantillon']) ?></td>
+                            <td><?= htmlspecialchars($report['Visiteur']) ?></td>
+                            <td><?= htmlspecialchars($report['Practicien']) ?></td>
+                        </tr>
+                    <?php
+                        endif;
+                    endforeach;
+                    if (!$hasDeleted):
+                    ?>
+                        <tr>
+                            <td colspan="7" style="text-align: center;">Aucun rapport supprimé pour cette région.</td>
                         </tr>
                     <?php endif; ?>
                 </tbody>

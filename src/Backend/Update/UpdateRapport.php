@@ -2,6 +2,11 @@
 require_once '../config.php';
 session_start(); // Assurez-vous que la session est démarrée
 
+// Vérification du rôle utilisateur
+if (!isset($_SESSION['role']) || $_SESSION['role'] !== 'responsable') {
+    die("Accès refusé : seuls les responsables peuvent modifier un rapport.");
+}
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérifiez que region_id est défini dans la session
     if (!isset($_SESSION['region_id']) || !isset($_SESSION['user_id'])) {
@@ -24,6 +29,26 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Vérification des champs obligatoires
     if (empty($idRapport) || empty($adresse) || empty($codepostal) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien)) {
         die("Tous les champs sont obligatoires.");
+    }
+
+    if (!filter_var($idRapport, FILTER_VALIDATE_INT) ||
+        !filter_var($echantillon, FILTER_VALIDATE_INT) ||
+        !filter_var($produit, FILTER_VALIDATE_INT) ||
+        !filter_var($visiteur, FILTER_VALIDATE_INT) ||
+        !filter_var($practicien, FILTER_VALIDATE_INT)
+    ) {
+        die("Erreur : Un des champs numériques est invalide.");
+    }
+
+    // Validation du code postal (exemple pour la France : 5 chiffres)
+    if (!preg_match('/^\d{5}$/', $codepostal)) {
+        die("Erreur : Le code postal est invalide.");
+    }
+
+    // Validation de la date (format YYYY-MM-DD)
+    $dateObj = DateTime::createFromFormat('d-m-Y', $date);
+    if (!$dateObj || $dateObj->format('d-m-Y') !== $date) {
+        die("Erreur : Le format de la date est invalide.");
     }
 
     if (strtotime($date) > time()) {
