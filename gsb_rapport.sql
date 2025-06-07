@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost
--- Généré le : ven. 06 juin 2025 à 07:50
+-- Généré le : sam. 07 juin 2025 à 12:45
 -- Version du serveur : 10.11.11-MariaDB
 -- Version de PHP : 8.3.21
 
@@ -289,8 +289,17 @@ CREATE TABLE `rapport` (
   `Id_Produit` int(11) NOT NULL,
   `Id_Visiteur` int(11) NOT NULL,
   `Id_Practicien` int(11) NOT NULL,
-  `IdRegion` int(11) NOT NULL
+  `IdRegion` int(11) NOT NULL,
+  `etat` enum('supprimer','valide') DEFAULT 'valide'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `rapport`
+--
+
+INSERT INTO `rapport` (`Id_Rappport`, `AdresseRapport`, `DateRapport`, `CodePostal`, `Id_Echantillon`, `Id_Produit`, `Id_Visiteur`, `Id_Practicien`, `IdRegion`, `etat`) VALUES
+(8, '7 rue Jean Marie Leclerc', '2025-06-06', 69009, 22, 25, 18, 5, 3, 'supprimer'),
+(9, '20 rue pierre alexandre', '2025-02-01', 69000, 16, 19, 18, 7, 3, 'valide');
 
 -- --------------------------------------------------------
 
@@ -429,7 +438,7 @@ ALTER TABLE `produit`
 -- AUTO_INCREMENT pour la table `rapport`
 --
 ALTER TABLE `rapport`
-  MODIFY `Id_Rappport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id_Rappport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `region`
