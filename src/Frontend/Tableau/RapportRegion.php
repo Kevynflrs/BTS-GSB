@@ -1,45 +1,5 @@
 <?php
-session_start(); // Démarre la session pour accéder aux données utilisateur
-$isConnected = isset($_SESSION['user_id']); // Vérifie si l'utilisateur est connecté
-require_once '../../Backend/auth.php'; // Vérifie si l'utilisateur est connecté
-require_once '../../Backend/config.php';
-
-// Vérifie si l'utilisateur est connecté
-if (!isset($_SESSION['region_id'])) {
-    die("Vous devez être connecté pour accéder à cette page.");
-}
-
-$regionId = $_SESSION['region_id']; // Récupère l'ID de la région de l'utilisateur connecté
-
-try {
-    $bdd = getDatabaseConnection();
-    $stmt = $bdd->prepare("
-        SELECT 
-            r.AdresseRapport, 
-            r.CodePostal, 
-            r.DateRapport, 
-            p.NomProduit, 
-            e.NomEchantillon, 
-            v.PrenomUtilisateur AS Visiteur, 
-            pr.EmailPracticien AS Practicien
-        FROM rapport r
-        JOIN produit p ON r.Id_Produit = p.Id_Produit
-        JOIN echantillon e ON r.Id_Echantillon = e.Id_Echantillon
-        JOIN utilisateur v ON r.Id_Visiteur = v.Id_Utilisateur
-        JOIN practicien pr ON r.Id_Practicien = pr.Id_Practicien
-        WHERE r.IdRegion = :regionId
-    ");
-    $stmt->execute([':regionId' => $regionId]);
-    $reports = $stmt->fetchAll();
-} catch (Exception $e) {
-    die("Erreur : " . $e->getMessage());
-}
-
-// Vérifie si l'utilisateur a le rôle "responsable"
-if (!hasRole('delegue')) {
-    header('Location: ../liste.php'); // Redirige vers une page accessible
-    exit();
-}
+require '../../Backend/Tableau/RapportRegion.php'; // Inclut la logique PHP
 ?>
 <!DOCTYPE html>
 <html lang="fr">
