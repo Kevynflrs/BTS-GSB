@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.2-1.fc41
 -- https://www.phpmyadmin.net/
 --
--- Hôte : galaxyvadmin.mysql.db
--- Généré le : lun. 16 juin 2025 à 10:49
--- Version du serveur : 8.0.41-32
--- Version de PHP : 8.1.32
+-- Hôte : localhost
+-- Généré le : lun. 16 juin 2025 à 11:55
+-- Version du serveur : 10.11.11-MariaDB
+-- Version de PHP : 8.3.21
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Base de données : `galaxyvadmin`
+-- Base de données : `gsb_rapport`
 --
 
 -- --------------------------------------------------------
@@ -28,11 +28,11 @@ SET time_zone = "+00:00";
 --
 
 CREATE TABLE `echantillon` (
-  `Id_Echantillon` int NOT NULL,
+  `Id_Echantillon` int(11) NOT NULL,
   `DateDistributionEchantillon` date DEFAULT NULL,
-  `NomEchantillon` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Libele` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `QuantiteEchantillon` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `NomEchantillon` varchar(50) DEFAULT NULL,
+  `Libele` varchar(50) DEFAULT NULL,
+  `QuantiteEchantillon` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -98,15 +98,15 @@ INSERT INTO `echantillon` (`Id_Echantillon`, `DateDistributionEchantillon`, `Nom
 --
 
 CREATE TABLE `practicien` (
-  `Id_Practicien` int NOT NULL,
-  `EmailPracticien` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `SpecialiteMedecin` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `DescriptionMedecin` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Cabinet` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `AdressePracticien` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `CodePostalPracticien` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `VillePracticien` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `IdRegion` int NOT NULL
+  `Id_Practicien` int(11) NOT NULL,
+  `EmailPracticien` varchar(50) DEFAULT NULL,
+  `SpecialiteMedecin` varchar(50) DEFAULT NULL,
+  `DescriptionMedecin` varchar(255) DEFAULT NULL,
+  `Cabinet` varchar(255) DEFAULT NULL,
+  `AdressePracticien` varchar(50) DEFAULT NULL,
+  `CodePostalPracticien` varchar(50) DEFAULT NULL,
+  `VillePracticien` varchar(50) DEFAULT NULL,
+  `IdRegion` int(11) NOT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -212,11 +212,11 @@ INSERT INTO `practicien` (`Id_Practicien`, `EmailPracticien`, `SpecialiteMedecin
 --
 
 CREATE TABLE `produit` (
-  `Id_Produit` int NOT NULL,
-  `NomProduit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Id_Produit` int(11) NOT NULL,
+  `NomProduit` varchar(50) DEFAULT NULL,
   `DateAjoutProduit` date DEFAULT NULL,
-  `Libele` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `QuantiteProduit` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `Libele` varchar(50) DEFAULT NULL,
+  `QuantiteProduit` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -281,16 +281,25 @@ INSERT INTO `produit` (`Id_Produit`, `NomProduit`, `DateAjoutProduit`, `Libele`,
 --
 
 CREATE TABLE `rapport` (
-  `Id_Rappport` int NOT NULL,
-  `AdresseRapport` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
+  `Id_Rappport` int(11) NOT NULL,
+  `AdresseRapport` varchar(255) DEFAULT NULL,
   `DateRapport` date DEFAULT NULL,
-  `CodePostal` int DEFAULT NULL,
-  `Id_Echantillon` int NOT NULL,
-  `Id_Produit` int NOT NULL,
-  `Id_Visiteur` int NOT NULL,
-  `Id_Practicien` int NOT NULL,
-  `IdRegion` int NOT NULL
+  `CodePostal` int(5) DEFAULT NULL,
+  `Id_Echantillon` int(11) NOT NULL,
+  `Id_Produit` int(11) NOT NULL,
+  `Id_Visiteur` int(11) NOT NULL,
+  `Id_Practicien` int(11) NOT NULL,
+  `IdRegion` int(11) NOT NULL,
+  `etat` enum('supprimer','valide') DEFAULT 'valide'
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Déchargement des données de la table `rapport`
+--
+
+INSERT INTO `rapport` (`Id_Rappport`, `AdresseRapport`, `DateRapport`, `CodePostal`, `Id_Echantillon`, `Id_Produit`, `Id_Visiteur`, `Id_Practicien`, `IdRegion`, `etat`) VALUES
+(8, '7 rue Jean Marie Leclerc', '2025-06-06', 69009, 22, 25, 18, 5, 3, 'supprimer'),
+(9, '20 rue pierre alexandre', '2025-02-01', 69000, 16, 19, 18, 7, 3, 'valide');
 
 -- --------------------------------------------------------
 
@@ -299,8 +308,8 @@ CREATE TABLE `rapport` (
 --
 
 CREATE TABLE `region` (
-  `IdRegion` int NOT NULL,
-  `NomRegion` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL
+  `IdRegion` int(11) NOT NULL,
+  `NomRegion` varchar(50) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -334,14 +343,14 @@ INSERT INTO `region` (`IdRegion`, `NomRegion`) VALUES
 --
 
 CREATE TABLE `utilisateur` (
-  `Id_Utilisateur` int NOT NULL,
-  `MotDePasse` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `NomUtilisateur` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `Role` enum('visiteur','delegue','responsable') COLLATE utf8mb4_general_ci NOT NULL,
-  `PrenomUtilisateur` varchar(50) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `NumeroTelephoneUtilisateur` varchar(15) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `MailUtilisateur` varchar(255) COLLATE utf8mb4_general_ci DEFAULT NULL,
-  `IdRegion` int DEFAULT NULL
+  `Id_Utilisateur` int(11) NOT NULL,
+  `MotDePasse` varchar(255) DEFAULT NULL,
+  `NomUtilisateur` varchar(50) DEFAULT NULL,
+  `Role` enum('visiteur','delegue','responsable') NOT NULL,
+  `PrenomUtilisateur` varchar(50) DEFAULT NULL,
+  `NumeroTelephoneUtilisateur` varchar(15) DEFAULT NULL,
+  `MailUtilisateur` varchar(255) DEFAULT NULL,
+  `IdRegion` int(11) DEFAULT NULL
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -411,37 +420,37 @@ ALTER TABLE `utilisateur`
 -- AUTO_INCREMENT pour la table `echantillon`
 --
 ALTER TABLE `echantillon`
-  MODIFY `Id_Echantillon` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `Id_Echantillon` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
 
 --
 -- AUTO_INCREMENT pour la table `practicien`
 --
 ALTER TABLE `practicien`
-  MODIFY `Id_Practicien` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
+  MODIFY `Id_Practicien` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=96;
 
 --
 -- AUTO_INCREMENT pour la table `produit`
 --
 ALTER TABLE `produit`
-  MODIFY `Id_Produit` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
+  MODIFY `Id_Produit` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT pour la table `rapport`
 --
 ALTER TABLE `rapport`
-  MODIFY `Id_Rappport` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `Id_Rappport` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT pour la table `region`
 --
 ALTER TABLE `region`
-  MODIFY `IdRegion` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `IdRegion` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT pour la table `utilisateur`
 --
 ALTER TABLE `utilisateur`
-  MODIFY `Id_Utilisateur` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `Id_Utilisateur` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
