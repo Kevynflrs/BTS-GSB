@@ -1,9 +1,9 @@
 <?php
 function getDatabaseConnection() {
-    $host = 'galaxyvadmin.mysql.db';
-    $dbname = 'galaxyvadmin';
-    $username = 'galaxyvadmin';
-    $password = 'ykXhT5t9v54Veu0afj0C';
+    $host = 'localhost';
+    $dbname = 'kevyn_bdd';
+    $username = 'kevyn';
+    $password = 'kevyn';
 
     try {
         $dsn = "mysql:host=$host;dbname=$dbname;charset=utf8";
