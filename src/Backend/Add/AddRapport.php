@@ -16,9 +16,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $produit = intval($_POST['produit']);
     $visiteur = intval($_POST['visiteur']);
     $practicien = intval($_POST['practicien']);
+    $quantiteEchantillon = intval($_POST['quantiteEchantillon']);
 
     // Vérification des champs obligatoires
-    if (empty($adresse) || empty($codepostal) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien)) {
+    if (empty($adresse) || empty($codepostal) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien) || empty ($quantiteEchantillon)) {
         die("Tous les champs sont obligatoires.");
     }
 
@@ -32,8 +33,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         // Préparation de la requête d'insertion
         $stmt = $bdd->prepare("
-            INSERT INTO rapport (AdresseRapport, CodePostal, DateRapport, Id_Echantillon, Id_Produit, Id_Visiteur, Id_Practicien, IdRegion)
-            VALUES (:adresse, :codepostal, :date, :echantillon, :produit, :visiteur, :practicien, :regionId)
+            INSERT INTO rapport (AdresseRapport, CodePostal, DateRapport, Id_Echantillon, Id_Produit, Id_Visiteur, Id_Practicien, IdRegion, QuantiteEchantillon)
+            VALUES (:adresse, :codepostal, :date, :echantillon, :produit, :visiteur, :practicien, :regionId, :quantiteEchantillon)
         ");
 
         // Exécution de la requête avec les données du formulaire
@@ -46,6 +47,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':visiteur' => $visiteur,
             ':practicien' => $practicien,
             ':regionId' => $regionId, // Ajout de la région
+            ':quantiteEchantillon' => $quantiteEchantillon // Ajout de la quantité d'échantillon
         ]);
 
         echo "<script>

@@ -40,6 +40,7 @@ require '../../Backend/Tableau/RapportRegion.php'; // Inclut la logique PHP
                         <th>Échantillon</th>
                         <th>Visiteur</th>
                         <th>Praticien</th>
+                        <th>Quantité Échantillon</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,6 +54,7 @@ require '../../Backend/Tableau/RapportRegion.php'; // Inclut la logique PHP
                                 <td><?= htmlspecialchars($report['NomEchantillon']) ?></td>
                                 <td><?= htmlspecialchars($report['Visiteur']) ?></td>
                                 <td><?= htmlspecialchars($report['Practicien']) ?></td>
+                                <td><?= htmlspecialchars($report['QuantiteEchantillon']) ?></td>
                             </tr>
                         <?php endforeach; ?>
                     <?php else: ?>
