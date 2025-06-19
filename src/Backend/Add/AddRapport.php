@@ -14,6 +14,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $date = htmlspecialchars(trim($_POST['date']));
     $echantillon = intval($_POST['echantillon']);
     $produit = intval($_POST['produit']);
+    $categorie = htmlspecialchars(trim($_POST['categorie'])); // Récupération de la catégorie
+    $categorie = !empty($categorie) ? $categorie : null; // Si la catégorie est vide, on la met à null
     $visiteur = intval($_POST['visiteur']);
     $practicien = intval($_POST['practicien']);
 
