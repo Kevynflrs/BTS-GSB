@@ -3,12 +3,14 @@ require '../../Backend/Tableau/RapportPerso.php'; // Inclut la logique PHP
 ?>
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mes Rapports</title>
     <link rel="stylesheet" href="../../../public/css/table.css">
 </head>
+
 <body>
     <header>
         <img src="../../../public/img/GSB-Logo.png" />
@@ -16,6 +18,9 @@ require '../../Backend/Tableau/RapportPerso.php'; // Inclut la logique PHP
             <a href="/">Home</a>
             <a href="../liste.php">Liste</a>
             <a href="../ajout.php">Ajout</a>
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>Bienvenue, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
+            <?php endif; ?>
             <?php if ($isConnected): ?>
                 <form action="../../Backend/logout.php" method="post" style="display: inline;">
                     <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
@@ -66,4 +71,5 @@ require '../../Backend/Tableau/RapportPerso.php'; // Inclut la logique PHP
         <p>&copy; 2025 GSB Rapports - Tous droits réservés.</p>
     </footer>
 </body>
+
 </html>

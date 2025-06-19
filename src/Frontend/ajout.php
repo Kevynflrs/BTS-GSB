@@ -21,6 +21,9 @@ $bdd = getDatabaseConnection();
     <div class="menu">
       <a href="/">Home</a>
       <a href="liste.php">Liste</a>
+      <?php if (isset($_SESSION['username'])): ?>
+        <p>Bienvenue, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
+      <?php endif; ?>
       <?php if (isset($_SESSION['user_id'])): ?>
         <form action="../Backend/logout.php" method="post" style="display: inline;">
           <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>

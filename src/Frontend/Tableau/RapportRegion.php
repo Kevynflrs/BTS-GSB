@@ -18,6 +18,9 @@ require '../../Backend/Tableau/RapportRegion.php'; // Inclut la logique PHP
             <a href="/">Home</a>
             <a href="../liste.php">Liste</a>
             <a href="../ajout.php">Ajout</a>
+            <?php if (isset($_SESSION['username'])): ?>
+                <p>Bienvenue, <?= htmlspecialchars($_SESSION['username']) ?>!</p>
+            <?php endif; ?>
             <?php if ($isConnected): ?>
                 <form action="../../Backend/logout.php" method="post" style="display: inline;">
                     <button type="submit" style="background: none; border: none; color: white; font-weight: bold; cursor: pointer;">Déconnexion</button>
