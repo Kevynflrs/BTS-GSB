@@ -16,6 +16,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         die("Tous les champs sont obligatoires.");
     }
 
+    // Vérification du format de l'adresse e-mail via regex
+    if (!preg_match(
+        "/^[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/",
+        $mail
+    )) {
+        $mailErr = "Invalid URL";
+    }
+
     try {
         // Connexion à la base de données
         $bdd = getDatabaseConnection();

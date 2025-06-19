@@ -11,9 +11,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $password = htmlspecialchars(trim($_POST['password']));
 
     // Validation des champs
-    if (!filter_var($mail, FILTER_VALIDATE_EMAIL)) {
-        echo "<script>alert('L\'adresse e-mail est invalide.'); window.history.back();</script>";
-        exit;
+    // Vérification du format de l'adresse e-mail via regex
+    if (!preg_match(
+        "/^[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+\\/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?$/",
+        $mail
+    )) {
+        $mailErr = "Invalid URL";
     }
 
     if (!preg_match('/^\+?[0-9\s\-]+$/', $telephone)) {
