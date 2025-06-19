@@ -15,12 +15,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $echantillon = intval($_POST['echantillon']);
     $produit = intval($_POST['produit']);
     $categorie = htmlspecialchars(trim($_POST['categorie'])); // Récupération de la catégorie
-    $categorie = !empty($categorie) ? $categorie : null; // Si la catégorie est vide, on la met à null
     $visiteur = intval($_POST['visiteur']);
     $practicien = intval($_POST['practicien']);
 
     // Vérification des champs obligatoires
-    if (empty($adresse) || empty($codepostal) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($practicien)) {
+    if (empty($adresse) || empty($codepostal) || empty($date) || empty($echantillon) || empty($produit) || empty($visiteur) || empty($categorie) || empty($practicien)) {
         die("Tous les champs sont obligatoires.");
     }
 
@@ -32,10 +31,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         // Connexion à la base de données
         $bdd = getDatabaseConnection();
 
-        // Préparation de la requête d'insertion
+        // Préparation de la requête d'insertion dans la table rapport
         $stmt = $bdd->prepare("
             INSERT INTO rapport (AdresseRapport, CodePostal, DateRapport, Id_Echantillon, Id_Produit, Id_Visiteur, Id_Practicien, IdRegion)
             VALUES (:adresse, :codepostal, :date, :echantillon, :produit, :visiteur, :practicien, :regionId)
+        ");
+
+        $stmt_produit = $bdd->prepare("
+            INSERT INTO produit (NomProduit, Categorie)
+            VALUES (:produit, :categorie)
         ");
 
         // Exécution de la requête avec les données du formulaire
@@ -49,6 +53,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             ':practicien' => $practicien,
             ':regionId' => $regionId, // Ajout de la région
         ]);
+
+        // Exécution de la requête pour insérer le produit
+        $stmt_produit->execute([
+            ':produit' => $produit,
+            ':categorie' => $categorie, // Ajout de la catégorie
+        ]); 
 
         echo "<script>
             alert('Rapport ajouté avec succès.');
